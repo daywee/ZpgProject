@@ -1,34 +1,21 @@
 #pragma once
 #include <GL/glew.h>
+#include "ShaderLoader.h"
+#include <glm/glm.hpp>
 
 class Shader
 {
 public:
-	Shader();
+	Shader(const string vertexFile, const string fragmentFile);
 	~Shader();
-
-	GLuint getVertexShader();
-	GLuint getFragmentShader();
-	GLuint getShaderProgram();
+	
 	void checkStatus();
+	void useProgram() const;
+	void useMatrix(glm::mat4 matrix) const;
 
 private:
-	const char* vertex_shader =
-		"#version 330\n"
-		"layout(location=0) in vec3 vp;"
-		"void main () {"
-		"     gl_Position = vec4 (vp, 1.0);"
-		"}";
+	ShaderLoader* shaderLoader_;
 
-	const char* fragment_shader =
-		"#version 330\n"
-		"out vec4 frag_colour;"
-		"void main () {"
-		"     frag_colour = vec4 (0.5, 0.0, 0.5, 1.0);"
-		"}";
-
-	GLuint vertexShader;
-	GLuint fragmentShader;
-	GLuint shaderProgram;
+	GLuint shaderProgram_;
+	GLint modelTransform_;
 };
-

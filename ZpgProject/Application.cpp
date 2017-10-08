@@ -8,7 +8,7 @@
 Application::Application()
 {
 	initWindow();
-	shader_ = new Shader();
+	shader_ = new Shader("Shaders/VertexShader.glsl", "Shaders/FragmentShader.glsl");
 	scene_ = new Scene();
 }
 
@@ -21,9 +21,22 @@ Application::~Application()
 
 void Application::run()
 {
+	Object* object1 = new Object();
+	//Object* object2 = new Object();
+	scene_->addObject(object1);
+	//scene_->addObject(object2);
+
+
+	float a = 0.0f;
 	while (!glfwWindowShouldClose(window_))
 	{
-		scene_->render(window_, shader_->getShaderProgram());
+		object1->setAngle(a);
+		object1->setPosition(glm::vec3(a, 0.0f, 0.0f));
+		scene_->render(window_, shader_);
+		a += 0.01;
+		//object2->rotate(-0.01f, glm::vec3(0.0f, 0.0f, 1.0f));
+		//object_->scale(glm::vec3(1.01f, 1.0f, 1.0f));
+		//object_->translate(glm::vec3(0.0f, 0.001f, 0.0f));
 	}
 }
 

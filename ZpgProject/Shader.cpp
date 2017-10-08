@@ -1,55 +1,43 @@
 #include "Shader.h"
 #include <GL/glew.h>
+#include <glm/gtc/type_ptr.hpp>
 #include <cstddef>
 #include <cstdio>
 
-
-Shader::Shader()
+Shader::Shader(const string vertexFile, const string fragmentFile)
 {
-	vertexShader = glCreateShader(GL_VERTEX_SHADER);
-	glShaderSource(vertexShader, 1, &vertex_shader, NULL);
-	glCompileShader(vertexShader);
-
-	fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-	glShaderSource(fragmentShader, 1, &fragment_shader, NULL);
-	glCompileShader(fragmentShader);
-
-	shaderProgram = glCreateProgram();
-	glAttachShader(shaderProgram, fragmentShader);
-	glAttachShader(shaderProgram, vertexShader);
-	glLinkProgram(shaderProgram);
+	shaderLoader_ = new ShaderLoader();
+	shaderProgram_ = shaderLoader_->loadShader(vertexFile.c_str(), fragmentFile.c_str());
+	modelTransform_ = glGetUniformLocation(shaderProgram_, "trasfromMatrix");
 }
 
 Shader::~Shader()
 {
-}
-
-GLuint Shader::getVertexShader()
-{
-	return vertexShader;
-}
-
-GLuint Shader::getFragmentShader()
-{
-	return fragmentShader;
-}
-
-GLuint Shader::getShaderProgram()
-{
-	return shaderProgram;
+	shaderLoader_->deleteShader();
+	delete shaderLoader_;
 }
 
 void Shader::checkStatus()
 {
 	GLint status;
-	glGetProgramiv(shaderProgram, GL_LINK_STATUS, &status);
+	glGetProgramiv(shaderProgram_, GL_LINK_STATUS, &status);
 	if (status == GL_FALSE)
 	{
 		GLint infoLogLength;
-		glGetProgramiv(shaderProgram, GL_INFO_LOG_LENGTH, &infoLogLength);
+		glGetProgramiv(shaderProgram_, GL_INFO_LOG_LENGTH, &infoLogLength);
 		GLchar *strInfoLog = new GLchar[infoLogLength + 1];
-		glGetProgramInfoLog(shaderProgram, infoLogLength, NULL, strInfoLog);
+		glGetProgramInfoLog(shaderProgram_, infoLogLength, NULL, strInfoLog);
 		fprintf(stderr, "Linker failure: %s\n", strInfoLog);
 		delete[] strInfoLog;
 	}
+}
+
+void Shader::useProgram() const
+{
+	glUseProgram(shaderProgram_);
+}
+
+void Shader::useMatrix(glm::mat4 matrix) const
+{
+	glUniformMatrix4fv(modelTransform_, 1, GL_FALSE, glm::value_ptr(matrix)); //location, count, transpose, *value
 }
