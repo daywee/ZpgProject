@@ -7,12 +7,16 @@
 class Application
 {
 public:
-	Application();
 	~Application();
+	static Application* getInstance();
 
 	void run();
 
 private:
+	Application();
+
+	static Application* instance;
+
 	GLFWwindow* window_;
 	Shader* shader_;
 	Scene* scene_;
@@ -21,3 +25,4 @@ private:
 	static void errorCallback(int error, const char* description);
 	void printVersionInfo();
 };
+	

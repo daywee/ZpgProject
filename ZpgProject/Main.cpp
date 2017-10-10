@@ -2,9 +2,8 @@
 
 int main()
 {
-	Application* app = new Application();
+	Application* app = Application::getInstance();
 	app->run();
-	delete app;
 
 	/*
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);

@@ -4,6 +4,16 @@
 #include <GL/glew.h>
 #include "Scene.h"
 
+Application* Application::instance = nullptr;
+
+Application* Application::getInstance()
+{
+	if (instance == nullptr)
+	{
+		instance = new Application();
+	}
+	return instance;
+}
 
 Application::Application()
 {
@@ -27,7 +37,7 @@ void Application::run()
 	//scene_->addObject(object2);
 
 
-	float a = 0.0f;
+	float a = 0.01f;
 	while (!glfwWindowShouldClose(window_))
 	{
 		object1->setAngle(a);
