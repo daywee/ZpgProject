@@ -36,7 +36,7 @@ void Object::draw(Shader* shader, Camera* camera)
 
 	shader->useProjectionMatrix(camera->getProjectionMatrix());
 	shader->useViewMatrix(camera->getViewMatrix());
-	shader->useMatrix(getTransformationMatrix());
+	shader->useMatrix(transformationMatrix());
 
 	glBindVertexArray(vao_);
 	glDrawArrays(GL_TRIANGLES, 0, 3); // mode,first,count
@@ -45,22 +45,12 @@ void Object::draw(Shader* shader, Camera* camera)
 	shader->unuseProgram();
 }
 
-void Object::setPosition(glm::vec3 position)
+Transformation* Object::transformation()
 {
-	transformation_->setPosition(position);
+	return transformation_;
 }
 
-void Object::setSize(glm::vec3 size)
-{
-	transformation_->setSize(size);
-}
-
-void Object::setAngle(float angle)
-{
-	transformation_->setAngleRadians(angle);
-}
-
-glm::mat4 Object::getTransformationMatrix()
+glm::mat4 Object::transformationMatrix()
 {
 	return transformation_->getTransformation();
 }

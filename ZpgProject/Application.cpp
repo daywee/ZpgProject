@@ -39,8 +39,8 @@ void Application::run()
 
 	while (!glfwWindowShouldClose(window_))
 	{
-		object1->setPosition(glm::vec3(0.f, 0.0f, 0.0f));
-		object1->setAngle(glfwGetTime());
+		object1->transformation()->setPosition(glm::vec3(0.f, 0.0f, 0.0f));
+		object1->transformation()->setAngleRadians(glfwGetTime());
 		scene_->render(window_, shader_, camera_);
 	}
 }

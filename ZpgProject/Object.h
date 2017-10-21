@@ -1,6 +1,5 @@
 #pragma once
 #include <GL/glew.h>
-#include <glm/gtc/matrix_transform.hpp>
 #include "Transformation.h"
 #include "Shader.h"
 #include "Camera.h"
@@ -11,14 +10,11 @@ public:
 	Object();
 	~Object();
 
-	void bindVertexArray();
 	void draw(Shader* shader, Camera* camera);
 
-	void setPosition(glm::vec3 position);
-	void setSize(glm::vec3 size);
-	void setAngle(float angle);
+	Transformation* transformation();
 
-	glm::mat4 getTransformationMatrix();
+	glm::mat4 transformationMatrix();
 	int getId();
 
 private:
