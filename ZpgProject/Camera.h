@@ -10,7 +10,10 @@ public:
 	glm::mat4 getProjectionMatrix() const;
 	glm::mat4 getViewMatrix() const;
 	void setTarget(float fi, float psi);
+	void setTarget(glm::vec3 target);
+	void setTarget(float x, float y, float z);
 	void setPosition(float x, float y, float z);
+	void setPosition(glm::vec3 position);
 	void toLeft();
 	void toRight();
 

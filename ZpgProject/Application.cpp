@@ -34,13 +34,16 @@ Application::~Application()
 void Application::run()
 {
 	Object* object1 = new Object();
+	Object* object2 = new Object();
 	scene_->addObject(object1);
-
+	scene_->addObject(object2);
 
 	while (!glfwWindowShouldClose(window_))
 	{
 		object1->transformation()->setPosition(glm::vec3(0.f, 0.0f, 0.0f));
-		object1->transformation()->setAngleRadians(glfwGetTime());
+		//object2->transformation()->setPosition(glm::vec3(sin(glfwGetTime()) * 5, 3.0f, 0.0f));
+		camera_->setPosition(sin(glfwGetTime()) * 5, 0, 10);
+
 		scene_->render(window_, shader_, camera_);
 	}
 }

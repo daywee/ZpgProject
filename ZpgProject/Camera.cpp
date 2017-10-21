@@ -22,18 +22,37 @@ glm::mat4 Camera::getViewMatrix() const
 	return glm::lookAt(eye_, target_, up_);
 }
 
-void Camera::setTarget(float fi, float psi) // todo setTarget()
+void Camera::setTarget(float fi, float psi)
 {
+	target_ = glm::vec3(glm::cos(fi), glm::sin(fi), glm::sin(psi));
 }
 
-void Camera::setPosition(float x, float y, float z) // todo setPosition()
+void Camera::setTarget(glm::vec3 target)
 {
+	target_ = target;
+}
+
+void Camera::setTarget(float x, float y, float z)
+{
+	target_ = glm::vec3(x, y, z);
+}
+
+void Camera::setPosition(float x, float y, float z)
+{
+	eye_ = glm::vec3(x, y, z);
+}
+
+void Camera::setPosition(glm::vec3 position)
+{
+	eye_ = position;
 }
 
 void Camera::toLeft() // todo toLeft()
 {
+	eye_ += glm::normalize(glm::cross(target_, up_));
 }
 
 void Camera::toRight() // todo toRight()
 {
+	eye_ -= glm::normalize(glm::cross(target_, up_));
 }
