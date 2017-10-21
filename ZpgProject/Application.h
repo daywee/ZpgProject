@@ -23,8 +23,16 @@ private:
 	Scene* scene_;
 	Camera* camera_;
 
+	void initCallbacks();
 	void initWindow();
-	static void errorCallback(int error, const char* description);
 	void printVersionInfo();
+
+	void cursorPosCallback(GLFWwindow* window, double mouseX, double mouseY);
+	void errorCallback(int error, const char* description);
+	void keyCallback(GLFWwindow* window, int key, int scanCode, int action, int mods);
+	void mouseButtonCallback(GLFWwindow* window, int button, int action, int mods);
+	void windowFocusCallback(GLFWwindow* window, int focused);
+	void windowIconifyCallback(GLFWwindow* window, int iconified);
+	void windowSizeCallback(GLFWwindow* window, int width, int height);
 };
 	
