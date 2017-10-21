@@ -4,6 +4,7 @@
 #include "Shader.h"
 #include <vector>
 #include "Object.h"
+#include "Camera.h"
 
 class Scene
 {
@@ -11,7 +12,7 @@ public:
 	Scene();
 	~Scene();
 
-	void render(GLFWwindow*, Shader* shader);
+	void render(GLFWwindow*, Shader* shader, Camera* camera);
 	void addObject(Object* object);
 
 private:

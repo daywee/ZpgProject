@@ -1,8 +1,10 @@
 #version 400
 in vec3 vp;
 
-uniform mat4 trasfromMatrix;
+uniform mat4 modelMatrix;
+uniform mat4 viewMatrix;
+uniform mat4 projectionMatrix;
 
 void main () {
-  gl_Position = trasfromMatrix * vec4 (vp, 1.0);
+  gl_Position = (projectionMatrix * viewMatrix * modelMatrix) * vec4 (vp, 1.0);
 }

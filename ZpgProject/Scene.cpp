@@ -9,17 +9,15 @@ Scene::~Scene()
 {
 }
 
-void Scene::render(GLFWwindow* window, Shader* shader)
+void Scene::render(GLFWwindow* window, Shader* shader, Camera* camera)
 {
 	// clear color and depth buffer
+	glClearColor(0.3f, 0.3f, 0.3f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	shader->useProgram();
 	
 	for each (auto object in objects_)
 	{
-		object.bindVertexArray();
-		shader->useMatrix(object.getTransformationMatrix());
-		object.draw();
+		object.draw(shader, camera);
 	}
 
 	glfwPollEvents();

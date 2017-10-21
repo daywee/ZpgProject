@@ -11,11 +11,16 @@ public:
 	
 	void checkStatus();
 	void useProgram() const;
-	void useMatrix(glm::mat4 matrix) const;
+	void unuseProgram() const;
+	void useMatrix(glm::mat4 matrix);
+	void useViewMatrix(glm::mat4 matrix);
+	void useProjectionMatrix(glm::mat4 matrix);
 
 private:
 	ShaderLoader* shaderLoader_;
 
 	GLuint shaderProgram_;
-	GLint modelTransform_;
+	GLint modelMatrix_;
+	GLint viewMatrix_;
+	GLint projectionMatrix_;
 };

@@ -8,7 +8,9 @@ Shader::Shader(const string vertexFile, const string fragmentFile)
 {
 	shaderLoader_ = new ShaderLoader();
 	shaderProgram_ = shaderLoader_->loadShader(vertexFile.c_str(), fragmentFile.c_str());
-	modelTransform_ = glGetUniformLocation(shaderProgram_, "trasfromMatrix");
+	modelMatrix_ = glGetUniformLocation(shaderProgram_, "modelMatrix");
+	viewMatrix_ = glGetUniformLocation(shaderProgram_, "viewMatrix");
+	projectionMatrix_ = glGetUniformLocation(shaderProgram_, "projectionMatrix");
 }
 
 Shader::~Shader()
@@ -37,7 +39,23 @@ void Shader::useProgram() const
 	glUseProgram(shaderProgram_);
 }
 
-void Shader::useMatrix(glm::mat4 matrix) const
+void Shader::unuseProgram() const
 {
-	glUniformMatrix4fv(modelTransform_, 1, GL_FALSE, glm::value_ptr(matrix)); //location, count, transpose, *value
+	glUseProgram(0);
+}
+
+void Shader::useViewMatrix(glm::mat4 matrix)
+{
+	glUniformMatrix4fv(viewMatrix_, 1, GL_FALSE, glm::value_ptr(matrix));
+}
+
+void Shader::useProjectionMatrix(glm::mat4 matrix)
+{
+	glUniformMatrix4fv(projectionMatrix_, 1, GL_FALSE, glm::value_ptr(matrix));
+}
+
+void Shader::useMatrix(glm::mat4 matrix)
+{
+	glUniformMatrix4fv(modelMatrix_, 1, GL_FALSE, glm::value_ptr(matrix)); //location, count, transpose, *value
+	
 }

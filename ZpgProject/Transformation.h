@@ -12,7 +12,8 @@ public:
 
 	void setPosition(glm::vec3 position);
 	void setSize(glm::vec3 size);
-	void setAngle(float angle);
+	void setAngleRadians(float angle);
+	void setAngleDegrees(float angle);
 
 private:
 

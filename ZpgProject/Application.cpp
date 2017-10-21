@@ -20,6 +20,7 @@ Application::Application()
 	initWindow();
 	shader_ = new Shader("Shaders/VertexShader.glsl", "Shaders/FragmentShader.glsl");
 	scene_ = new Scene();
+	camera_ = new Camera();
 }
 
 Application::~Application()
@@ -40,10 +41,9 @@ void Application::run()
 	float a = 0.01f;
 	while (!glfwWindowShouldClose(window_))
 	{
-		object1->setAngle(a);
-		object1->setPosition(glm::vec3(a, 0.0f, 0.0f));
-		scene_->render(window_, shader_);
-		a += 0.01;
+		object1->setPosition(glm::vec3(0.f, 0.0f, 0.0f));
+		scene_->render(window_, shader_, camera_);
+		a += 0.01f;
 		//object2->rotate(-0.01f, glm::vec3(0.0f, 0.0f, 1.0f));
 		//object_->scale(glm::vec3(1.01f, 1.0f, 1.0f));
 		//object_->translate(glm::vec3(0.0f, 0.001f, 0.0f));

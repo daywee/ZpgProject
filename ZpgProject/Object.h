@@ -2,6 +2,8 @@
 #include <GL/glew.h>
 #include <glm/gtc/matrix_transform.hpp>
 #include "Transformation.h"
+#include "Shader.h"
+#include "Camera.h"
 
 class Object
 {
@@ -10,7 +12,7 @@ public:
 	~Object();
 
 	void bindVertexArray();
-	void draw();
+	void draw(Shader* shader, Camera* camera);
 
 	void setPosition(glm::vec3 position);
 	void setSize(glm::vec3 size);
