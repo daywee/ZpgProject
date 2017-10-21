@@ -34,21 +34,14 @@ Application::~Application()
 void Application::run()
 {
 	Object* object1 = new Object();
-	//Object* object2 = new Object();
 	scene_->addObject(object1);
-	//scene_->addObject(object2);
 
 
-	float a = 0.01f;
 	while (!glfwWindowShouldClose(window_))
 	{
 		object1->setPosition(glm::vec3(0.f, 0.0f, 0.0f));
 		object1->setAngle(glfwGetTime());
 		scene_->render(window_, shader_, camera_);
-		a += 0.01f;
-		//object2->rotate(-0.01f, glm::vec3(0.0f, 0.0f, 1.0f));
-		//object_->scale(glm::vec3(1.01f, 1.0f, 1.0f));
-		//object_->translate(glm::vec3(0.0f, 0.001f, 0.0f));
 	}
 }
 

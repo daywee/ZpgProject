@@ -33,26 +33,15 @@ Object::~Object()
 void Object::draw(Shader* shader, Camera* camera)
 {
 	shader->useProgram();
-	glm::mat4 p = glm::perspective(glm::radians(45.0f), 4.0f / 3.0f, 0.1f, 100.0f);
-	glm::mat4 pm = camera->getProjectionMatrix();
-	glm::mat4 vm = camera->getViewMatrix();
-	
-	shader->useProjectionMatrix(p);
-	shader->useViewMatrix(vm);
 
-	shader->unuseProgram();
-
-	shader->useProgram();
-	glBindVertexArray(vao_);
+	shader->useProjectionMatrix(camera->getProjectionMatrix());
+	shader->useViewMatrix(camera->getViewMatrix());
 	shader->useMatrix(getTransformationMatrix());
 
-	
-	//shader->useMatrix(getTransformationMatrix(), glm::mat4(), glm::mat4());
-
-
+	glBindVertexArray(vao_);
 	glDrawArrays(GL_TRIANGLES, 0, 3); // mode,first,count
-
 	glBindVertexArray(0);
+
 	shader->unuseProgram();
 }
 
@@ -74,8 +63,6 @@ void Object::setAngle(float angle)
 glm::mat4 Object::getTransformationMatrix()
 {
 	return transformation_->getTransformation();
-	//return *transformationMatrix_;
-	// TODO: remove
 }
 
 int Object::getId()

@@ -22,18 +22,18 @@ glm::mat4 Camera::getViewMatrix() const
 	return glm::lookAt(eye_, target_, up_);
 }
 
-void Camera::setTarget(float fi, float psi)
+void Camera::setTarget(float fi, float psi) // todo setTarget()
 {
 }
 
-void Camera::setPosition(float x, float y, float z)
+void Camera::setPosition(float x, float y, float z) // todo setPosition()
 {
 }
 
-void Camera::toLeft()
+void Camera::toLeft() // todo toLeft()
 {
 }
 
-void Camera::toRight()
+void Camera::toRight() // todo toRight()
 {
 }
