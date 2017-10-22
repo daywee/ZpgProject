@@ -3,6 +3,7 @@
 #include <cstdlib>
 #include <GL/glew.h>
 #include "Scene.h"
+#include "Light.h"
 
 Application* Application::instance = nullptr;
 
@@ -34,16 +35,24 @@ Application::~Application()
 void Application::run()
 {
 	Object* object1 = new Object();
-	//Object* object2 = new Object();
+	Object* object2 = new Object();
+	Object* object3 = new Object();
+	Object* object4 = new Object();
 	scene_->addObject(object1);
-	//scene_->addObject(object2);
+	scene_->addObject(object2);
+	scene_->addObject(object3);
+	scene_->addObject(object4);
+	object1->transformation()->setPosition(glm::vec3(5.f, 0.f, 0.f));
+	object2->transformation()->setPosition(glm::vec3(0.f, -5.f, 0.f));
+	object3->transformation()->setPosition(glm::vec3(-5.f, 0.f, 0.f));
+	object4->transformation()->setPosition(glm::vec3(0.f, 5.f, 0.f));
+	camera_->setPosition(0, 0, 10);
+
+	Light* light = new Light();
 
 	while (!glfwWindowShouldClose(window_))
 	{
-		object1->transformation()->setPosition(glm::vec3(0.f, 0.0f, 0.0f));
-		//object2->transformation()->setPosition(glm::vec3(sin(glfwGetTime()) * 5, 3.0f, 0.0f));
-		camera_->setPosition(sin(glfwGetTime()) * 5, 0, 10);
-
+		object1->transformation()->setPosition(glm::vec3(glm::sin(glfwGetTime()) * 5, 0, 0));
 		scene_->render(window_);
 	}
 }

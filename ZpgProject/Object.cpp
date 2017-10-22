@@ -20,12 +20,12 @@ Object::Object()
 	glBindBuffer(GL_ARRAY_BUFFER, vbo_);
 
 	// position
+	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GL_FLOAT), (GLvoid*)(0 * sizeof(GL_FLOAT)));
-	glEnableVertexAttribArray(0); // enable vertex attributes
 
 	// normal vector
+	glEnableVertexAttribArray(1);
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GL_FLOAT), (GLvoid*)(3 * sizeof(GL_FLOAT)));
-	glEnableVertexAttribArray(1); // enable vertex attributes
 
 	// unbind
 	glBindBuffer(GL_ARRAY_BUFFER, 0);

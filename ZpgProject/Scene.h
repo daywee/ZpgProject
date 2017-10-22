@@ -6,6 +6,7 @@
 #include "Object.h"
 #include "Camera.h"
 #include "Shader.h"
+#include "Light.h"
 
 class Scene : public IObserver
 {
@@ -15,11 +16,13 @@ public:
 
 	void render(GLFWwindow*);
 	void addObject(Object* object);
+	void addLight(Light* light);
 
 	void notify(ISubject* subject) override;
 
 private:
 	vector<Object> objects_;
+	vector<Light> lights_;
 
 	GLuint vao_;
 	GLuint vbo_;

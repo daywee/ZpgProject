@@ -21,6 +21,11 @@ void Scene::render(GLFWwindow* window)
 		object.draw(shader_);
 	}
 
+	for each (auto light in lights_)
+	{
+		
+	}
+
 	glfwPollEvents();
 	// put the stuff we’ve been drawing onto the display
 	glfwSwapBuffers(window);
@@ -29,6 +34,11 @@ void Scene::render(GLFWwindow* window)
 void Scene::addObject(Object* object)
 {
 	objects_.push_back(*object);
+}
+
+void Scene::addLight(Light* light)
+{
+	lights_.push_back(*light);
 }
 
 void Scene::notify(ISubject* subject)
