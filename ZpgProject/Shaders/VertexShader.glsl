@@ -11,7 +11,7 @@ out vec4 worldPosition;
 out vec4 worldNormal;
 
 void main () {
-  gl_Position = (projectionMatrix * viewMatrix * modelMatrix) * vec4 (position, 1.0);
-  worldPosition = modelMatrix * vec4(position, 1.0);
-  worldNormal = modelMatrix * vec4(normal, 1.0);
+	gl_Position = (projectionMatrix * viewMatrix * modelMatrix) * vec4 (position, 1.0);
+	worldPosition = modelMatrix * vec4(position, 1.0);
+	worldNormal = modelMatrix * vec4(normal, 1.0);
 }

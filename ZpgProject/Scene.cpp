@@ -23,7 +23,7 @@ void Scene::render(GLFWwindow* window)
 
 	for each (auto light in lights_)
 	{
-		
+		light.draw(shader_);
 	}
 
 	glfwPollEvents();
