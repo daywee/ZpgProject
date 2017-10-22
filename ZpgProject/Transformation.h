@@ -8,7 +8,7 @@ public:
 	Transformation();
 	~Transformation();
 
-	glm::mat4 getTransformation() const;
+	glm::mat4 matrix() const;
 
 	void setPosition(glm::vec3 position);
 	void setSize(glm::vec3 size);

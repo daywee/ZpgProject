@@ -14,7 +14,6 @@ public:
 
 	Transformation* transformation();
 
-	glm::mat4 transformationMatrix();
 	int getId();
 
 private:

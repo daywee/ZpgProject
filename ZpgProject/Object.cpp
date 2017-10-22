@@ -33,7 +33,7 @@ Object::~Object()
 void Object::draw(Shader* shader)
 {
 	shader->useProgram();
-	shader->useMatrix(transformationMatrix());
+	shader->useMatrix(transformation()->matrix());
 
 	glBindVertexArray(vao_);
 	glDrawArrays(GL_TRIANGLES, 0, 3); // mode,first,count
@@ -45,11 +45,6 @@ void Object::draw(Shader* shader)
 Transformation* Object::transformation()
 {
 	return transformation_;
-}
-
-glm::mat4 Object::transformationMatrix()
-{
-	return transformation_->getTransformation();
 }
 
 int Object::getId()

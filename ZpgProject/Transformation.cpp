@@ -9,7 +9,7 @@ Transformation::~Transformation()
 {
 }
 
-glm::mat4 Transformation::getTransformation() const
+glm::mat4 Transformation::matrix() const
 {
 	glm::mat4 matrix = glm::mat4();
 
