@@ -30,12 +30,9 @@ Object::~Object()
 {
 }
 
-void Object::draw(Shader* shader, Camera* camera)
+void Object::draw(Shader* shader)
 {
 	shader->useProgram();
-
-	shader->useProjectionMatrix(camera->getProjectionMatrix());
-	shader->useViewMatrix(camera->getViewMatrix());
 	shader->useMatrix(transformationMatrix());
 
 	glBindVertexArray(vao_);

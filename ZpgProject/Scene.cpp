@@ -1,15 +1,16 @@
 #include "Scene.h"
 
 
-Scene::Scene()
+Scene::Scene(Shader* shader)
 {
+	shader_ = shader;
 }
 
 Scene::~Scene()
 {
 }
 
-void Scene::render(GLFWwindow* window, Shader* shader, Camera* camera)
+void Scene::render(GLFWwindow* window)
 {
 	// clear color and depth buffer
 	glClearColor(0.3f, 0.3f, 0.3f, 1.0f);
@@ -17,7 +18,7 @@ void Scene::render(GLFWwindow* window, Shader* shader, Camera* camera)
 	
 	for each (auto object in objects_)
 	{
-		object.draw(shader, camera);
+		object.draw(shader_);
 	}
 
 	glfwPollEvents();
@@ -28,4 +29,18 @@ void Scene::render(GLFWwindow* window, Shader* shader, Camera* camera)
 void Scene::addObject(Object* object)
 {
 	objects_.push_back(*object);
+}
+
+void Scene::notify(ISubject* subject)
+{
+	Camera* camera = static_cast<Camera*>(subject);
+	useCamera(camera);
+}
+
+void Scene::useCamera(Camera* camera)
+{
+	shader_->useProgram();
+	shader_->useProjectionMatrix(camera->getProjectionMatrix());
+	shader_->useViewMatrix(camera->getViewMatrix());
+	shader_->unuseProgram();
 }

@@ -1,7 +1,6 @@
 #pragma once
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include "Shader.h"
 #include "Scene.h"
 #include "Camera.h"
 
@@ -19,7 +18,6 @@ private:
 	static Application* instance;
 
 	GLFWwindow* window_;
-	Shader* shader_;
 	Scene* scene_;
 	Camera* camera_;
 

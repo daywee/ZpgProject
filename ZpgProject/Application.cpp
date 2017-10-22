@@ -19,9 +19,9 @@ Application::Application()
 {
 	initWindow();
 	initCallbacks();
-	shader_ = new Shader("Shaders/VertexShader.glsl", "Shaders/FragmentShader.glsl");
-	scene_ = new Scene();
+	scene_ = new Scene(new Shader("Shaders/VertexShader.glsl", "Shaders/FragmentShader.glsl"));
 	camera_ = new Camera();
+	camera_->addObserver(scene_);
 }
 
 Application::~Application()
@@ -44,7 +44,7 @@ void Application::run()
 		//object2->transformation()->setPosition(glm::vec3(sin(glfwGetTime()) * 5, 3.0f, 0.0f));
 		camera_->setPosition(sin(glfwGetTime()) * 5, 0, 10);
 
-		scene_->render(window_, shader_, camera_);
+		scene_->render(window_);
 	}
 }
 

@@ -5,19 +5,25 @@
 #include <vector>
 #include "Object.h"
 #include "Camera.h"
+#include "Shader.h"
 
-class Scene
+class Scene : public IObserver
 {
 public:
-	Scene();
+	Scene(Shader* shader);
 	~Scene();
 
-	void render(GLFWwindow*, Shader* shader, Camera* camera);
+	void render(GLFWwindow*);
 	void addObject(Object* object);
+
+	void notify(ISubject* subject) override;
 
 private:
 	vector<Object> objects_;
 
 	GLuint vao_;
 	GLuint vbo_;
+	Shader* shader_;
+
+	void useCamera(Camera* camera);
 };

@@ -1,7 +1,9 @@
 #pragma once
 #include <glm/gtc/matrix_transform.hpp>
+#include "ISubject.h"
+#include <vector>
 
-class Camera
+class Camera : public ISubject
 {
 public:
 	Camera();
@@ -17,6 +19,9 @@ public:
 	void toLeft();
 	void toRight();
 
+	void addObserver(IObserver* observer) override;
+	void removeObserver(IObserver* observer) override;
+
 private:
 	glm::vec3 eye_;
 	glm::vec3 target_;
@@ -24,10 +29,13 @@ private:
 
 	glm::mat4 projection_;
 
+	std::vector<IObserver*> observers_;
+
 	float fov_;
 	float aspect_;
 	float near_;
 	float far_;
 
+	void notifyObservers();
 };
 

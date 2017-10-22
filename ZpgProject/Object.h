@@ -10,7 +10,7 @@ public:
 	Object();
 	~Object();
 
-	void draw(Shader* shader, Camera* camera);
+	void draw(Shader* shader);
 
 	Transformation* transformation();
 
