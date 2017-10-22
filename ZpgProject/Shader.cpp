@@ -57,5 +57,4 @@ void Shader::useProjectionMatrix(glm::mat4 matrix)
 void Shader::useMatrix(glm::mat4 matrix)
 {
 	glUniformMatrix4fv(modelMatrix_, 1, GL_FALSE, glm::value_ptr(matrix));
-	
 }

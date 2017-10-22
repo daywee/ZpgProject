@@ -3,6 +3,7 @@
 #include "Transformation.h"
 #include "Shader.h"
 #include "Camera.h"
+#include "Sphere.h"
 
 class Object
 {
@@ -20,12 +21,6 @@ private:
 	static int nextId;
 
 	int id_;
-
-	const float points_[9] = {
-		0.0f, 0.5f, 0.0f,
-		0.5f, -0.5f, 0.0f,
-		-0.5f, -0.5f, 0.0f
-	};
 
 	GLuint vao_;
 	GLuint vbo_;

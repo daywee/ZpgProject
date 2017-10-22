@@ -34,9 +34,9 @@ Application::~Application()
 void Application::run()
 {
 	Object* object1 = new Object();
-	Object* object2 = new Object();
+	//Object* object2 = new Object();
 	scene_->addObject(object1);
-	scene_->addObject(object2);
+	//scene_->addObject(object2);
 
 	while (!glfwWindowShouldClose(window_))
 	{
@@ -92,6 +92,8 @@ void Application::initWindow()
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	glOrtho(-ratio, ratio, -1.f, 1.f, 1.f, -1.f);
+
+	glEnable(GL_DEPTH_TEST);
 }
 
 void Application::cursorPosCallback(GLFWwindow* window, double mouseX, double mouseY)
