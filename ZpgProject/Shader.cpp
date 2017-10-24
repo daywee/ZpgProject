@@ -11,7 +11,7 @@ Shader::Shader(const string vertexFile, const string fragmentFile)
 	modelMatrix_ = glGetUniformLocation(shaderProgram_, "modelMatrix");
 	viewMatrix_ = glGetUniformLocation(shaderProgram_, "viewMatrix");
 	projectionMatrix_ = glGetUniformLocation(shaderProgram_, "projectionMatrix");
-	//normalMatrix_ = glGetUniformLocation(shaderProgram_, "normalMatrix");
+	normalMatrix_ = glGetUniformLocation(shaderProgram_, "worldLightPosition");
 }
 
 Shader::~Shader()
@@ -52,7 +52,7 @@ void Shader::useViewMatrix(glm::mat4 matrix)
 
 void Shader::useLightPosition(glm::vec3 position)
 {
-	//glProgramUniform3f(shaderProgram_, normalMatrix_, position.x, position.y, position.z);
+	glProgramUniform3f(shaderProgram_, normalMatrix_, position.x, position.y, position.z);
 }
 
 void Shader::useProjectionMatrix(glm::mat4 matrix)

@@ -21,8 +21,8 @@ public:
 	void notify(ISubject* subject) override;
 
 private:
-	vector<Object> objects_;
-	vector<Light> lights_;
+	vector<Object*> objects_;
+	vector<Light*> lights_;
 
 	GLuint vao_;
 	GLuint vbo_;

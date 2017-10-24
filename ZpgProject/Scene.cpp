@@ -18,12 +18,12 @@ void Scene::render(GLFWwindow* window)
 	
 	for each (auto object in objects_)
 	{
-		object.draw(shader_);
+		object->draw(shader_);
 	}
 
 	for each (auto light in lights_)
 	{
-		light.draw(shader_);
+		light->draw(shader_);
 	}
 
 	glfwPollEvents();
@@ -33,12 +33,12 @@ void Scene::render(GLFWwindow* window)
 
 void Scene::addObject(Object* object)
 {
-	objects_.push_back(*object);
+	objects_.push_back(object);
 }
 
 void Scene::addLight(Light* light)
 {
-	lights_.push_back(*light);
+	lights_.push_back(light);
 }
 
 void Scene::notify(ISubject* subject)

@@ -5,6 +5,11 @@ Light::Light()
 {
 }
 
+Light::Light(glm::vec3 position)
+	: position_(position)
+{
+}
+
 
 Light::~Light()
 {
