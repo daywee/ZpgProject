@@ -1,10 +1,12 @@
 #include "Camera.h"
 
-
-
 Camera::Camera()
-	: eye_(glm::vec3(0, 0, 10)), target_(glm::vec3(0)), up_(glm::vec3(0, 1.0f, 0)), fov_(45.0f), aspect_(4.0f / 3.0f), near_(0.1f), far_(100.0f)
+	: eye_(glm::vec3(0, 0, 10)), up_(glm::vec3(0, 1.0f, 0)), fov_(45.0f), aspect_(4.0f / 3.0f), near_(0.1f), far_(100.0f)
 {
+	// todo: why are these default values?
+	fi_ = glm::radians(270.f);
+	psi_ = glm::radians(90.f);
+	setTarget(fi_, psi_);
 }
 
 
@@ -24,7 +26,9 @@ glm::mat4 Camera::getViewMatrix() const
 
 void Camera::setTarget(float fi, float psi)
 {
-	target_ = glm::vec3(glm::cos(fi), glm::sin(fi), glm::sin(psi));
+	fi_ = fi;
+	psi_ = psi;
+	target_ = eye_ + glm::vec3(glm::cos(fi_) * glm::sin(psi_), glm::cos(psi_), glm::sin(fi_) * glm::sin(psi_));
 	notifyObservers();
 }
 
@@ -52,15 +56,59 @@ void Camera::setPosition(glm::vec3 position)
 	notifyObservers();
 }
 
-void Camera::toLeft() // todo: test funcionality
+void Camera::moveRight()
 {
-	eye_ += glm::normalize(glm::cross(target_, up_));
+	const auto vec = glm::cross(glm::normalize(up_), glm::normalize(target_ - eye_));
+	eye_ -= vec;
+	target_ -= vec;
 	notifyObservers();
 }
 
-void Camera::toRight() // todo: test functionality
+void Camera::moveLeft()
 {
-	eye_ -= glm::normalize(glm::cross(target_, up_));
+	const auto vec = glm::cross(glm::normalize(up_), glm::normalize(target_ - eye_));
+	eye_ += vec;
+	target_ += vec;
+	notifyObservers();
+}
+
+void Camera::moveForward()
+{
+	const auto vec = glm::normalize(target_ - eye_);
+	eye_ += vec;
+	target_ += vec;
+	notifyObservers();
+}
+
+void Camera::moveBackward()
+{
+	const auto vec = glm::normalize(target_ - eye_);
+	eye_ -= vec;
+	target_ -= vec;
+	notifyObservers();
+}
+
+void Camera::rotateRight()
+{
+	setTarget(fi_ + 0.1f, psi_);
+	notifyObservers();
+}
+
+void Camera::rotateLeft()
+{
+	setTarget(fi_ - 0.1f, psi_);
+	notifyObservers();
+}
+
+void Camera::rotateUp()
+{
+	setTarget(fi_, psi_ - 0.1f);
+	notifyObservers();
+}
+
+void Camera::rotateDown()
+{
+	setTarget(fi_, psi_ + 0.1f);
 	notifyObservers();
 }
 

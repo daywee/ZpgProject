@@ -23,6 +23,7 @@ Application::Application()
 	scene_ = new Scene(new Shader("Shaders/VertexShader.glsl", "Shaders/FragmentShader.glsl"));
 	camera_ = new Camera();
 	camera_->addObserver(scene_);
+	printVersionInfo();
 }
 
 Application::~Application()
@@ -48,14 +49,14 @@ void Application::run()
 	object4->transformation()->setPosition(glm::vec3(0.f, 5.f, 0.f));
 	camera_->setPosition(0, 0, 10);
 
-	Light* light = new Light(glm::vec3(5, 0, 0));
+	Light* light = new Light(glm::vec3(0, 0, 5));
 	scene_->addLight(light);
-	light->setPosition(glm::vec3(0, 0, 0));
 
 	while (!glfwWindowShouldClose(window_))
 	{
 		object1->transformation()->setPosition(glm::vec3(glm::sin(glfwGetTime()) * 5, 0, 0));
 		scene_->render(window_);
+		glfwPollEvents();
 	}
 }
 
@@ -122,6 +123,23 @@ void Application::keyCallback(GLFWwindow* window, int key, int scanCode, int act
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, GL_TRUE);
 	printf("key_callback [%d,%d,%d,%d] \n", key, scanCode, action, mods);
+
+	if (key == GLFW_KEY_W)
+		camera_->moveForward();
+	if (key == GLFW_KEY_A)
+		camera_->moveLeft();
+	if (key == GLFW_KEY_S)
+		camera_->moveBackward();
+	if (key == GLFW_KEY_D)
+		camera_->moveRight();
+	if (key == GLFW_KEY_RIGHT)
+		camera_->rotateRight();
+	if (key == GLFW_KEY_LEFT)
+		camera_->rotateLeft();
+	if (key == GLFW_KEY_UP)
+		camera_->rotateUp();
+	if (key == GLFW_KEY_DOWN)
+		camera_->rotateDown();
 }
 
 void Application::mouseButtonCallback(GLFWwindow* window, int button, int action, int mods)

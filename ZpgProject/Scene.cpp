@@ -26,7 +26,6 @@ void Scene::render(GLFWwindow* window)
 		light->draw(shader_);
 	}
 
-	glfwPollEvents();
 	// put the stuff we’ve been drawing onto the display
 	glfwSwapBuffers(window);
 }

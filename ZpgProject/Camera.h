@@ -16,16 +16,28 @@ public:
 	void setTarget(float x, float y, float z);
 	void setPosition(float x, float y, float z);
 	void setPosition(glm::vec3 position);
-	void toLeft();
-	void toRight();
+
+	void moveRight();
+	void moveLeft();
+	void moveForward();
+	void moveBackward();
+
+	void rotateRight();
+	void rotateLeft();
+	void rotateUp();
+	void rotateDown();
 
 	void addObserver(IObserver* observer) override;
 	void removeObserver(IObserver* observer) override;
-
+	
 private:
+	float moveStep_ = .5f;
+
 	glm::vec3 eye_;
 	glm::vec3 target_;
 	glm::vec3 up_;
+	float fi_;
+	float psi_;
 
 	glm::mat4 projection_;
 
