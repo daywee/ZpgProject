@@ -44,17 +44,17 @@ void Application::run()
 	scene_->addObject(object3);
 	scene_->addObject(object4);
 	object1->transformation()->setPosition(glm::vec3(5.f, 0.f, 0.f));
-	object2->transformation()->setPosition(glm::vec3(0.f, 0.f, 0.f));
+	object2->transformation()->setPosition(glm::vec3(0.f, -5.f, 0.f));
 	object3->transformation()->setPosition(glm::vec3(-5.f, 0.f, 0.f));
 	object4->transformation()->setPosition(glm::vec3(0.f, 5.f, 0.f));
 	camera_->setPosition(0, 0, 10);
 
-	Light* light = new Light(glm::vec3(0, 0, 5));
+	Light* light = new Light(glm::vec3(0, 0, 0));
 	scene_->addLight(light);
 
 	while (!glfwWindowShouldClose(window_))
 	{
-		object1->transformation()->setPosition(glm::vec3(glm::sin(glfwGetTime()) * 5, 0, 0));
+		//object1->transformation()->setPosition(glm::vec3(glm::sin(glfwGetTime()) * 5, 0, 0));
 		scene_->render(window_);
 		glfwPollEvents();
 	}

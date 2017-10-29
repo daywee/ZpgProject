@@ -12,6 +12,7 @@ Shader::Shader(const string vertexFile, const string fragmentFile)
 	viewMatrix_ = glGetUniformLocation(shaderProgram_, "viewMatrix");
 	projectionMatrix_ = glGetUniformLocation(shaderProgram_, "projectionMatrix");
 	normalMatrix_ = glGetUniformLocation(shaderProgram_, "worldLightPosition");
+	cameraPosition_ = glGetUniformLocation(shaderProgram_, "worldCameraPosition");
 }
 
 Shader::~Shader()
@@ -53,6 +54,11 @@ void Shader::useViewMatrix(glm::mat4 matrix)
 void Shader::useLightPosition(glm::vec3 position)
 {
 	glProgramUniform3f(shaderProgram_, normalMatrix_, position.x, position.y, position.z);
+}
+
+void Shader::useCameraPosition(glm::vec3 position)
+{
+	glProgramUniform3f(shaderProgram_, cameraPosition_, position.x, position.y, position.y);
 }
 
 void Shader::useProjectionMatrix(glm::mat4 matrix)

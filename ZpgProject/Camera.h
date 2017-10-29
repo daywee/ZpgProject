@@ -17,6 +17,8 @@ public:
 	void setPosition(float x, float y, float z);
 	void setPosition(glm::vec3 position);
 
+	glm::vec3 getPosition();
+
 	void moveRight();
 	void moveLeft();
 	void moveForward();

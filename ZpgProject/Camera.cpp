@@ -56,6 +56,11 @@ void Camera::setPosition(glm::vec3 position)
 	notifyObservers();
 }
 
+glm::vec3 Camera::getPosition()
+{
+	return eye_;
+}
+
 void Camera::moveRight()
 {
 	const auto vec = glm::cross(glm::normalize(up_), glm::normalize(target_ - eye_));

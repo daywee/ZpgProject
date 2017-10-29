@@ -16,6 +16,7 @@ public:
 	void useViewMatrix(glm::mat4 matrix);
 	void useProjectionMatrix(glm::mat4 matrix);
 	void useLightPosition(glm::vec3 position);
+	void useCameraPosition(glm::vec3 position);
 
 private:
 	ShaderLoader* shaderLoader_;
@@ -25,4 +26,5 @@ private:
 	GLint viewMatrix_;
 	GLint projectionMatrix_;
 	GLint normalMatrix_;
+	GLint cameraPosition_;
 };

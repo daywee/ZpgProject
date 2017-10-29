@@ -51,5 +51,6 @@ void Scene::useCamera(Camera* camera)
 	shader_->useProgram();
 	shader_->useProjectionMatrix(camera->getProjectionMatrix());
 	shader_->useViewMatrix(camera->getViewMatrix());
+	shader_->useCameraPosition(camera->getPosition());
 	shader_->unuseProgram();
 }
