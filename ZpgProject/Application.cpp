@@ -39,17 +39,20 @@ void Application::run()
 	Object* object2 = new Object();
 	Object* object3 = new Object();
 	Object* object4 = new Object();
+	Object* object5 = new Object();
 	scene_->addObject(object1);
 	scene_->addObject(object2);
 	scene_->addObject(object3);
 	scene_->addObject(object4);
+	scene_->addObject(object5);
 	object1->transformation()->setPosition(glm::vec3(5.f, 0.f, 0.f));
 	object2->transformation()->setPosition(glm::vec3(0.f, -5.f, 0.f));
 	object3->transformation()->setPosition(glm::vec3(-5.f, 0.f, 0.f));
 	object4->transformation()->setPosition(glm::vec3(0.f, 5.f, 0.f));
+	object5->transformation()->setPosition(glm::vec3(0.f, 0.f, 0.f));
 	camera_->setPosition(0, 0, 10);
 
-	Light* light = new Light(glm::vec3(0, 0, 0));
+	Light* light = new Light(glm::vec3(0, 0, 5));
 	scene_->addLight(light);
 
 	while (!glfwWindowShouldClose(window_))
@@ -124,21 +127,21 @@ void Application::keyCallback(GLFWwindow* window, int key, int scanCode, int act
 		glfwSetWindowShouldClose(window, GL_TRUE);
 	printf("key_callback [%d,%d,%d,%d] \n", key, scanCode, action, mods);
 
-	if (key == GLFW_KEY_W)
+	if (key == GLFW_KEY_W && action == GLFW_PRESS)
 		camera_->moveForward();
-	if (key == GLFW_KEY_A)
+	if (key == GLFW_KEY_A && action == GLFW_PRESS)
 		camera_->moveLeft();
-	if (key == GLFW_KEY_S)
+	if (key == GLFW_KEY_S && action == GLFW_PRESS)
 		camera_->moveBackward();
-	if (key == GLFW_KEY_D)
+	if (key == GLFW_KEY_D && action == GLFW_PRESS)
 		camera_->moveRight();
-	if (key == GLFW_KEY_RIGHT)
+	if (key == GLFW_KEY_RIGHT && action == GLFW_PRESS)
 		camera_->rotateRight();
-	if (key == GLFW_KEY_LEFT)
+	if (key == GLFW_KEY_LEFT && action == GLFW_PRESS)
 		camera_->rotateLeft();
-	if (key == GLFW_KEY_UP)
+	if (key == GLFW_KEY_UP && action == GLFW_PRESS)
 		camera_->rotateUp();
-	if (key == GLFW_KEY_DOWN)
+	if (key == GLFW_KEY_DOWN && action == GLFW_PRESS)
 		camera_->rotateDown();
 }
 

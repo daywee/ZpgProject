@@ -1,5 +1,7 @@
 #include "Object.h"
 #include <algorithm>
+#include "SuziFlat.h"
+#include "SuziSmooth.h"
 
 int Object::nextId = 0;
 
@@ -12,7 +14,9 @@ Object::Object()
 	vbo_ = 0;
 	glGenBuffers(1, &vbo_); // generate the VBO
 	glBindBuffer(GL_ARRAY_BUFFER, vbo_);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(sphere), sphere, GL_STATIC_DRAW);
+	//glBufferData(GL_ARRAY_BUFFER, sizeof(sphere), sphere, GL_STATIC_DRAW); // sphere
+	//glBufferData(GL_ARRAY_BUFFER, sizeof(suziFlat), suziFlat, GL_STATIC_DRAW); // suzi flat
+	glBufferData(GL_ARRAY_BUFFER, sizeof(suziSmooth), suziSmooth, GL_STATIC_DRAW); // suzi smooth
 	// vertex attribute object(vao)
 	vao_ = 0;
 	glGenVertexArrays(1, &vao_); // generate the vao
@@ -42,7 +46,9 @@ void Object::draw(Shader* shader)
 	shader->useMatrix(transformation()->matrix());
 
 	glBindVertexArray(vao_);
-	glDrawArrays(GL_TRIANGLES, 0, 2880); // mode,first,count
+	//glDrawArrays(GL_TRIANGLES, 0, 2880); // sphere
+	glDrawArrays(GL_TRIANGLES, 0, 2904); // suzi flat
+	//glDrawArrays(GL_TRIANGLES, 0, 2904); // suzi smooth
 	glBindVertexArray(0);
 
 	shader->unuseProgram();
