@@ -58,7 +58,7 @@ void Shader::useLightPosition(glm::vec3 position)
 
 void Shader::useCameraPosition(glm::vec3 position)
 {
-	glProgramUniform3f(shaderProgram_, cameraPosition_, position.x, position.y, position.y);
+	glProgramUniform3f(shaderProgram_, cameraPosition_, position.x, position.y, position.z);
 }
 
 void Shader::useProjectionMatrix(glm::mat4 matrix)

@@ -14,10 +14,10 @@ void main () {
 
 	vec3 reflectedLight = normalize(reflect(lightVector, worldNormal));
 	vec3 objectCameraVector = normalize(vec3(worldPosition) - worldCameraPosition);
-	float reflectionDotProduct = pow(max(dot(reflectedLight, objectCameraVector), 0.0), 5.);
+	float reflectionDotProduct = max(dot(reflectedLight, objectCameraVector), 0.0);
 
 	vec4 ambient = vec4(0.1, 0.1, 0.1, 1.0);
 	vec4 reflection = reflectionDotProduct * vec4(.3, .3, .3, .3);
 
-	frag_colour = ambient + diffuse + reflection;
+	frag_colour = ambient + diffuse + pow(reflectionDotProduct, 10.);
 }

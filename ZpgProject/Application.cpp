@@ -49,10 +49,10 @@ void Application::run()
 	object2->transformation()->setPosition(glm::vec3(0.f, -5.f, 0.f));
 	object3->transformation()->setPosition(glm::vec3(-5.f, 0.f, 0.f));
 	object4->transformation()->setPosition(glm::vec3(0.f, 5.f, 0.f));
-	object5->transformation()->setPosition(glm::vec3(0.f, 0.f, 0.f));
+	object5->transformation()->setPosition(glm::vec3(0.f, 0.f, 5.f));
 	camera_->setPosition(0, 0, 10);
 
-	Light* light = new Light(glm::vec3(0, 0, 5));
+	Light* light = new Light(glm::vec3(0, 0, 0));
 	scene_->addLight(light);
 
 	while (!glfwWindowShouldClose(window_))
