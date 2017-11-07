@@ -42,6 +42,9 @@
     <ClCompile Include="Light.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TextureLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -85,6 +88,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SuziSmooth.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Plain.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureLoader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
