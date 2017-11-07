@@ -7,17 +7,23 @@ uniform vec3 worldCameraPosition;
 
 out vec4 frag_colour;
 
+const vec4 diffuseColor = vec4(0.385, 0.647, 0.812, 1.0);
+const vec4 ambient = vec4(0.1, 0.1, 0.1, 1.0);
+const vec4 specularColor = vec4(1.0, 1.0, 1.0, 1.0);
+
 void main () {
-	vec3 lightVector = normalize(worldLightPosition - vec3(worldPosition));
-	float dot_product = max(dot(vec4(lightVector, 1.0), normalize(vec4(worldNormal, 0.0))), 0.0);
-	vec4 diffuse = dot_product * vec4(0.385, 0.647, 0.812, 1.0);
+	vec3 normal = normalize(worldNormal);
+	vec3 lightDirection = normalize(worldLightPosition - vec3(worldPosition));
+	vec3 reflectionDirection = reflect(-lightDirection, normal);
+	vec3 viewDirection = normalize(worldCameraPosition - vec3(worldPosition));
 
-	vec3 reflectedLight = normalize(reflect(lightVector, worldNormal));
-	vec3 objectCameraVector = normalize(vec3(worldPosition) - worldCameraPosition);
-	float reflectionDotProduct = max(dot(reflectedLight, objectCameraVector), 0.0);
+	float lambertian = max(dot(lightDirection, normal), 0.0);
+	float specular = 0.0;
+	
+	if (lambertian > 0.0) {
+		float specularAngle = max(dot(reflectionDirection, viewDirection), 0.0);
+		specular = pow(specularAngle, 40.0);
+	}
 
-	vec4 ambient = vec4(0.1, 0.1, 0.1, 1.0);
-	vec4 reflection = reflectionDotProduct * vec4(.3, .3, .3, .3);
-
-	frag_colour = ambient + diffuse + pow(reflectionDotProduct, 10.);
+	frag_colour = ambient + lambertian * diffuseColor + specular * specularColor;
 }
