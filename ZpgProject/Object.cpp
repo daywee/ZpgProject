@@ -2,6 +2,7 @@
 #include <algorithm>
 #include "SuziFlat.h"
 #include "SuziSmooth.h"
+#include "Plain.h"
 
 int Object::nextId = 0;
 
@@ -14,9 +15,11 @@ Object::Object()
 	vbo_ = 0;
 	glGenBuffers(1, &vbo_); // generate the VBO
 	glBindBuffer(GL_ARRAY_BUFFER, vbo_);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(sphere), sphere, GL_STATIC_DRAW); // sphere
+	//glBufferData(GL_ARRAY_BUFFER, sizeof(sphere), sphere, GL_STATIC_DRAW); // sphere
 	//glBufferData(GL_ARRAY_BUFFER, sizeof(suziFlat), suziFlat, GL_STATIC_DRAW); // suzi flat
 	//glBufferData(GL_ARRAY_BUFFER, sizeof(suziSmooth), suziSmooth, GL_STATIC_DRAW); // suzi smooth
+	glBufferData(GL_ARRAY_BUFFER, sizeof(plain), plain, GL_STATIC_DRAW); // plain
+
 	// vertex attribute object(vao)
 	vao_ = 0;
 	glGenVertexArrays(1, &vao_); // generate the vao
@@ -25,11 +28,15 @@ Object::Object()
 
 	// position
 	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GL_FLOAT), (GLvoid*)(0 * sizeof(GL_FLOAT)));
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GL_FLOAT), (GLvoid*)(0 * sizeof(GL_FLOAT)));
 
 	// normal vector
 	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GL_FLOAT), (GLvoid*)(3 * sizeof(GL_FLOAT)));
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GL_FLOAT), (GLvoid*)(3 * sizeof(GL_FLOAT)));
+
+	// texture maps
+	glEnableVertexAttribArray(2);
+	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GL_FLOAT), (GLvoid*)(6 * sizeof(GL_FLOAT)));
 
 	// unbind
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -45,10 +52,12 @@ void Object::draw(Shader* shader)
 	shader->useProgram();
 	shader->useMatrix(transformation()->matrix());
 
+	glTexCoord2d(0.0, 1.0);
 	glBindVertexArray(vao_);
-	glDrawArrays(GL_TRIANGLES, 0, 2880); // sphere
+	//glDrawArrays(GL_TRIANGLES, 0, 2880); // sphere
 	//glDrawArrays(GL_TRIANGLES, 0, 2904); // suzi flat
 	//glDrawArrays(GL_TRIANGLES, 0, 2904); // suzi smooth
+	glDrawArrays(GL_TRIANGLES, 0, 6); // plain
 	glBindVertexArray(0);
 
 	shader->unuseProgram();

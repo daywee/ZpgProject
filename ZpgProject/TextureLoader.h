@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <GL/glew.h>
 
 class TextureLoader
 {
@@ -7,6 +8,6 @@ public:
 	TextureLoader();
 	~TextureLoader();
 
-	void load(std::string path);
+	GLuint load(std::string path, GLuint programId);
 };
 

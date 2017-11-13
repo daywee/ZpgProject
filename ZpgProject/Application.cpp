@@ -20,7 +20,8 @@ Application::Application()
 {
 	initWindow();
 	initCallbacks();
-	scene_ = new Scene(new Shader("Shaders/VertexShader.glsl", "Shaders/FragmentShader.glsl"));
+	//scene_ = new Scene(new Shader("Shaders/VertexShader.glsl", "Shaders/FragmentShader.glsl"));
+	scene_ = new Scene(new Shader("Shaders/VertexShader.glsl", "Shaders/TextureFragmentShader.glsl"));
 	camera_ = new Camera();
 	camera_->addObserver(scene_);
 	printVersionInfo();
@@ -109,6 +110,7 @@ void Application::initWindow()
 	glOrtho(-ratio, ratio, -1.f, 1.f, 1.f, -1.f);
 
 	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_TEXTURE_2D);
 }
 
 void Application::cursorPosCallback(GLFWwindow* window, double mouseX, double mouseY)

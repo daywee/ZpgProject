@@ -2,6 +2,7 @@
 #include <GL/glew.h>
 #include "ShaderLoader.h"
 #include <glm/glm.hpp>
+#include "TextureLoader.h"
 
 class Shader
 {
@@ -27,4 +28,6 @@ private:
 	GLint projectionMatrix_;
 	GLint normalMatrix_;
 	GLint cameraPosition_;
+	GLuint textureId_;
+	TextureLoader* textureLoader_;
 };

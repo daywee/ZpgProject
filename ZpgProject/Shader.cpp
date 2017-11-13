@@ -3,6 +3,7 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <cstddef>
 #include <cstdio>
+#include "TextureLoader.h"
 
 Shader::Shader(const string vertexFile, const string fragmentFile)
 {
@@ -13,12 +14,15 @@ Shader::Shader(const string vertexFile, const string fragmentFile)
 	projectionMatrix_ = glGetUniformLocation(shaderProgram_, "projectionMatrix");
 	normalMatrix_ = glGetUniformLocation(shaderProgram_, "worldLightPosition");
 	cameraPosition_ = glGetUniformLocation(shaderProgram_, "worldCameraPosition");
+	textureLoader_ = new TextureLoader();
+	textureId_ = textureLoader_->load("Textures/bricks.bmp", shaderProgram_);
 }
 
 Shader::~Shader()
 {
 	shaderLoader_->deleteShader();
 	delete shaderLoader_;
+	delete textureLoader_;
 }
 
 void Shader::checkStatus()
