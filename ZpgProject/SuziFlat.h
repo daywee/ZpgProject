@@ -1,7 +1,6 @@
 #pragma once
 
-//2904
-//glDrawArrays(GL_TRIANGLES, 0, 2904);
+const int suziFlatVertexCount = 2904;
 
 const float suziFlat[] = {
 	0.468750 , 0.242187 , 0.757812 , 0.663036 , -0.192883 , 0.723312,

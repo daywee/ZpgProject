@@ -20,8 +20,7 @@ Application::Application()
 {
 	initWindow();
 	initCallbacks();
-	//scene_ = new Scene(new Shader("Shaders/VertexShader.glsl", "Shaders/FragmentShader.glsl"));
-	scene_ = new Scene(new Shader("Shaders/VertexShader.glsl", "Shaders/TextureFragmentShader.glsl"));
+	scene_ = new Scene(new Shader("Shaders/VertexShader.glsl", "Shaders/FragmentShader.glsl"));
 	camera_ = new Camera();
 	camera_->addObserver(scene_);
 	printVersionInfo();
@@ -36,11 +35,11 @@ Application::~Application()
 
 void Application::run()
 {
-	Object* object1 = new Object();
-	Object* object2 = new Object();
-	Object* object3 = new Object();
-	Object* object4 = new Object();
-	Object* object5 = new Object();
+	Object* object1 = new Object(Sphere);
+	Object* object2 = new Object(Plain);
+	Object* object3 = new Object(SuziFlat);
+	Object* object4 = new Object(SuziSmooth);
+	Object* object5 = new Object(Plain);
 	scene_->addObject(object1);
 	scene_->addObject(object2);
 	scene_->addObject(object3);
