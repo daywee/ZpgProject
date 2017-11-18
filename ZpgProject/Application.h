@@ -3,6 +3,7 @@
 #include <GLFW/glfw3.h>
 #include "Scene.h"
 #include "Camera.h"
+#include "GameController.h"
 
 class Application
 {
@@ -20,6 +21,7 @@ private:
 	GLFWwindow* window_;
 	Scene* scene_;
 	Camera* camera_;
+	GameController* gameController_;
 
 	void initCallbacks();
 	void initWindow();

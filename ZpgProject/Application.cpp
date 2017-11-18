@@ -6,6 +6,7 @@
 #include "Light.h"
 #include <chrono>
 #include "SceneFactory.h"
+#include "GameController.h"
 
 Application* Application::instance = nullptr;
 
@@ -24,6 +25,8 @@ Application::Application()
 	initCallbacks();
 	camera_ = new Camera();
 	scene_ = SceneFactory::getTestScene1(camera_);
+	gameController_ = GameController::getInstance();
+	gameController_->setCamera(camera_);
 	printVersionInfo();
 }
 
@@ -40,7 +43,11 @@ void Application::run()
 	{
 		auto start = std::chrono::system_clock::now();
 
+		double x, y;
+		glfwGetCursorPos(window_, &x, &y);
+		gameController_->moveMouse(x, y);
 		scene_->update();
+		gameController_->update();
 		scene_->render(window_);
 		glfwPollEvents();
 
@@ -51,7 +58,6 @@ void Application::run()
 
 void Application::initCallbacks()
 {
-	glfwSetCursorPosCallback(window_, [](GLFWwindow* window, double mouseX, double mouseY) -> void { getInstance()->cursorPosCallback(window, mouseX, mouseY); });
 	glfwSetErrorCallback([](int error, const char* description) -> void { getInstance()->errorCallback(error, description); });
 	glfwSetKeyCallback(window_, [](GLFWwindow* window, int key, int scancode, int action, int mods) -> void { getInstance()->keyCallback(window, key, scancode, action, mods); });
 	glfwSetMouseButtonCallback(window_, [](GLFWwindow* window, int button, int action, int mods) -> void { getInstance()->mouseButtonCallback(window, button, action, mods); });
@@ -96,11 +102,7 @@ void Application::initWindow()
 
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_TEXTURE_2D);
-}
-
-void Application::cursorPosCallback(GLFWwindow* window, double mouseX, double mouseY)
-{
-	printf("cursor_pos_callback %d, %d \n", (int)mouseX, (int)mouseY);
+	glfwSetInputMode(window_, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 }
 
 void Application::errorCallback(int error, const char* description)
@@ -114,22 +116,10 @@ void Application::keyCallback(GLFWwindow* window, int key, int scanCode, int act
 		glfwSetWindowShouldClose(window, GL_TRUE);
 	printf("key_callback [%d,%d,%d,%d] \n", key, scanCode, action, mods);
 
-	if (key == GLFW_KEY_W && action == GLFW_PRESS)
-		camera_->moveForward();
-	if (key == GLFW_KEY_A && action == GLFW_PRESS)
-		camera_->moveLeft();
-	if (key == GLFW_KEY_S && action == GLFW_PRESS)
-		camera_->moveBackward();
-	if (key == GLFW_KEY_D && action == GLFW_PRESS)
-		camera_->moveRight();
-	if (key == GLFW_KEY_RIGHT && action == GLFW_PRESS)
-		camera_->rotateRight();
-	if (key == GLFW_KEY_LEFT && action == GLFW_PRESS)
-		camera_->rotateLeft();
-	if (key == GLFW_KEY_UP && action == GLFW_PRESS)
-		camera_->rotateUp();
-	if (key == GLFW_KEY_DOWN && action == GLFW_PRESS)
-		camera_->rotateDown();
+	if (action == GLFW_PRESS)
+		gameController_->pressKey(key);
+	if (action == GLFW_RELEASE)
+		gameController_->releaseKey(key);
 }
 
 void Application::mouseButtonCallback(GLFWwindow* window, int button, int action, int mods)

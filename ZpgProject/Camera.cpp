@@ -93,6 +93,18 @@ void Camera::moveBackward()
 	notifyObservers();
 }
 
+void Camera::moveUp()
+{
+	eye_ += up_;
+	target_ += up_;
+}
+
+void Camera::moveDown()
+{
+	eye_ -= up_;
+	target_ -= up_;
+}
+
 void Camera::rotateRight()
 {
 	setTarget(fi_ + 0.1f, psi_);
@@ -114,6 +126,18 @@ void Camera::rotateUp()
 void Camera::rotateDown()
 {
 	setTarget(fi_, psi_ + 0.1f);
+	notifyObservers();
+}
+
+void Camera::rotateX(float x)
+{
+	setTarget(fi_ + x, psi_);
+	notifyObservers();
+}
+
+void Camera::rotateY(float y)
+{
+	setTarget(fi_, psi_ - y);
 	notifyObservers();
 }
 

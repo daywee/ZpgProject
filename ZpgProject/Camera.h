@@ -23,11 +23,16 @@ public:
 	void moveLeft();
 	void moveForward();
 	void moveBackward();
+	void moveUp();
+	void moveDown();
 
 	void rotateRight();
 	void rotateLeft();
 	void rotateUp();
 	void rotateDown();
+
+	void rotateX(float x);
+	void rotateY(float y);
 
 	void addObserver(IObserver* observer) override;
 	void removeObserver(IObserver* observer) override;
