@@ -11,6 +11,7 @@ Object::Object(ObjectType type)
 	id_ = nextId++;
 	transformation_ = new Transformation();
 	type_ = type;
+	onUpdate = []() {};
 
 	switch (type)
 	{
@@ -41,6 +42,11 @@ void Object::draw(Shader* shader)
 	}
 
 	shader->unuseProgram();
+}
+
+void Object::update()
+{
+	onUpdate();
 }
 
 Transformation* Object::transformation()

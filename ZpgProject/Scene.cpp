@@ -30,6 +30,14 @@ void Scene::render(GLFWwindow* window)
 	glfwSwapBuffers(window);
 }
 
+void Scene::update()
+{
+	for each (auto object in objects_)
+	{
+		object->update();
+	}
+}
+
 void Scene::addObject(Object* object)
 {
 	objects_.push_back(object);

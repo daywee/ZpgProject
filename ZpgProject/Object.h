@@ -4,6 +4,7 @@
 #include "Shader.h"
 #include "Camera.h"
 #include "Sphere.h"
+#include <functional>
 
 enum ObjectType
 {
@@ -20,6 +21,8 @@ public:
 	~Object();
 
 	void draw(Shader* shader);
+	void update();
+	std::function<void()> onUpdate;
 
 	Transformation* transformation();
 

@@ -4,6 +4,7 @@
 #include <GL/glew.h>
 #include "Scene.h"
 #include "Light.h"
+#include <chrono>
 
 Application* Application::instance = nullptr;
 
@@ -41,8 +42,18 @@ void Application::run()
 	Object* object4 = new Object(SuziSmooth);
 	Object* object5 = new Object(Plain);
 	scene_->addObject(object1);
+	object1->onUpdate = [object1]()
+	{
+		object1->transformation()->setPosition(glm::vec3(glm::sin(glfwGetTime()) * 5, 0, 0));
+	};
 	scene_->addObject(object2);
 	scene_->addObject(object3);
+	float angle = 0.0f;
+	object3->onUpdate = [object3, &angle]()
+	{
+		object3->transformation()->setAngleDegrees(angle);
+		angle += 0.3f;
+	};
 	scene_->addObject(object4);
 	scene_->addObject(object5);
 	object1->transformation()->setPosition(glm::vec3(5.f, 0.f, 0.f));
@@ -57,9 +68,14 @@ void Application::run()
 
 	while (!glfwWindowShouldClose(window_))
 	{
-		//object1->transformation()->setPosition(glm::vec3(glm::sin(glfwGetTime()) * 5, 0, 0));
+		auto start = std::chrono::system_clock::now();
+
+		scene_->update();
 		scene_->render(window_);
 		glfwPollEvents();
+
+		auto end = std::chrono::system_clock::now();
+		chrono::milliseconds elapsed = chrono::duration_cast<chrono::milliseconds>(end - start);
 	}
 }
 

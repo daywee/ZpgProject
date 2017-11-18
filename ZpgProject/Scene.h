@@ -15,6 +15,7 @@ public:
 	~Scene();
 
 	void render(GLFWwindow*);
+	void update();
 	void addObject(Object* object);
 	void addLight(Light* light);
 
