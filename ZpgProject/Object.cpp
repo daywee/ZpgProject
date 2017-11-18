@@ -37,6 +37,7 @@ void Object::draw(Shader* shader)
 	case Sphere: drawInternal(sphereVertexCount); break;
 	case SuziFlat: drawInternal(suziFlatVertexCount); break;
 	case SuziSmooth: drawInternal(suziSmoothVertexCount); break;
+	default: throw std::exception("Uknown object type");
 	}
 
 	shader->unuseProgram();
