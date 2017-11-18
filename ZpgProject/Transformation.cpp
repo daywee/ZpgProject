@@ -39,3 +39,23 @@ void Transformation::setAngleDegrees(const float angle)
 {
 	this->angle_ = glm::radians(angle);
 }
+
+glm::vec3 Transformation::getPosition()
+{
+	return this->position_;
+}
+
+glm::vec3 Transformation::getSize()
+{
+	return size_;
+}
+
+float Transformation::getAngleRadians()
+{
+	return this->angle_;
+}
+
+float Transformation::getAngleDegrees()
+{
+	return glm::degrees(this->angle_);
+}

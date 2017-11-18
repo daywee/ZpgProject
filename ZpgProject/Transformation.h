@@ -15,6 +15,11 @@ public:
 	void setAngleRadians(float angle);
 	void setAngleDegrees(float angle);
 
+	glm::vec3 getPosition();
+	glm::vec3 getSize();
+	float getAngleRadians();
+	float getAngleDegrees();
+
 private:
 
 	glm::vec3 position_;

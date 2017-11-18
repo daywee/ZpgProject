@@ -5,6 +5,7 @@
 #include "Scene.h"
 #include "Light.h"
 #include <chrono>
+#include "SceneFactory.h"
 
 Application* Application::instance = nullptr;
 
@@ -21,9 +22,8 @@ Application::Application()
 {
 	initWindow();
 	initCallbacks();
-	scene_ = new Scene(new Shader("Shaders/VertexShader.glsl", "Shaders/FragmentShader.glsl"));
 	camera_ = new Camera();
-	camera_->addObserver(scene_);
+	scene_ = SceneFactory::getTestScene1(camera_);
 	printVersionInfo();
 }
 
@@ -36,36 +36,6 @@ Application::~Application()
 
 void Application::run()
 {
-	Object* object1 = new Object(Sphere);
-	Object* object2 = new Object(Plain);
-	Object* object3 = new Object(SuziFlat);
-	Object* object4 = new Object(SuziSmooth);
-	Object* object5 = new Object(Plain);
-	scene_->addObject(object1);
-	object1->onUpdate = [object1]()
-	{
-		object1->transformation()->setPosition(glm::vec3(glm::sin(glfwGetTime()) * 5, 0, 0));
-	};
-	scene_->addObject(object2);
-	scene_->addObject(object3);
-	float angle = 0.0f;
-	object3->onUpdate = [object3, &angle]()
-	{
-		object3->transformation()->setAngleDegrees(angle);
-		angle += 0.3f;
-	};
-	scene_->addObject(object4);
-	scene_->addObject(object5);
-	object1->transformation()->setPosition(glm::vec3(5.f, 0.f, 0.f));
-	object2->transformation()->setPosition(glm::vec3(0.f, -5.f, 0.f));
-	object3->transformation()->setPosition(glm::vec3(-5.f, 0.f, 0.f));
-	object4->transformation()->setPosition(glm::vec3(0.f, 5.f, 0.f));
-	object5->transformation()->setPosition(glm::vec3(0.f, 0.f, 5.f));
-	camera_->setPosition(0, 0, 10);
-
-	Light* light = new Light(glm::vec3(0, 0, 0));
-	scene_->addLight(light);
-
 	while (!glfwWindowShouldClose(window_))
 	{
 		auto start = std::chrono::system_clock::now();
