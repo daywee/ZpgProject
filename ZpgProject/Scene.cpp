@@ -16,14 +16,9 @@ void Scene::render(GLFWwindow* window)
 	glClearColor(0.3f, 0.3f, 0.3f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	
-	for each (auto object in objects_)
+	for each (auto renderable in renderables_)
 	{
-		object->draw(shader_);
-	}
-
-	for each (auto light in lights_)
-	{
-		light->draw(shader_);
+		renderable->render(shader_);
 	}
 
 	// put the stuff we’ve been drawing onto the display
@@ -32,20 +27,20 @@ void Scene::render(GLFWwindow* window)
 
 void Scene::update()
 {
-	for each (auto object in objects_)
+	for each (auto updatable in updatables_)
 	{
-		object->update();
+		updatable->update();
 	}
 }
 
-void Scene::addObject(Object* object)
+void Scene::registerRenderable(IRenderable* renderable)
 {
-	objects_.push_back(object);
+	renderables_.push_back(renderable);
 }
 
-void Scene::addLight(Light* light)
+void Scene::registerUpdatable(IUpdatable* updatable)
 {
-	lights_.push_back(light);
+	updatables_.push_back(updatable);
 }
 
 void Scene::notify(ISubject* subject)

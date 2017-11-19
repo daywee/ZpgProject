@@ -1,7 +1,8 @@
 #include "SceneFactory.h"
+#include "ModelLoader.h"
 
 
-Scene* SceneFactory::getTestScene1(Camera* camera)
+Scene* SceneFactory::testScene(Camera* camera)
 {
 	Scene* scene = new Scene(new Shader("Shaders/VertexShader.glsl", "Shaders/FragmentShader.glsl"));
 
@@ -11,19 +12,24 @@ Scene* SceneFactory::getTestScene1(Camera* camera)
 	Object* object4 = new Object(SuziSmooth);
 	Object* object5 = new Object(Plain);
 
-	scene->addObject(object1);
-	object1->onUpdate = [object1]()
+	scene->registerUpdatable(object1);
+	scene->registerRenderable(object1);
+	object1->onUpdate([object1]()
 	{
 		object1->transformation()->setPosition(glm::vec3(glm::sin(glfwGetTime()) * 5, 0, 0));
-	};
-	scene->addObject(object2);
-	scene->addObject(object3);
-	object3->onUpdate = [object3]()
+	});
+	scene->registerUpdatable(object2);
+	scene->registerRenderable(object2);
+	scene->registerUpdatable(object3);
+	scene->registerRenderable(object3);
+	object3->onUpdate([object3]()
 	{
 		object3->transformation()->setAngleDegrees(object3->transformation()->getAngleDegrees() + 0.3f);
-	};
-	scene->addObject(object4);
-	scene->addObject(object5);
+	});
+	scene->registerUpdatable(object4);
+	scene->registerRenderable(object4);
+	scene->registerUpdatable(object5);
+	scene->registerRenderable(object5);
 
 	object1->transformation()->setPosition(glm::vec3(5.f, 0.f, 0.f));
 	object2->transformation()->setPosition(glm::vec3(0.f, -5.f, 0.f));
@@ -32,7 +38,45 @@ Scene* SceneFactory::getTestScene1(Camera* camera)
 	object5->transformation()->setPosition(glm::vec3(0.f, 0.f, 5.f));
 
 	Light* light = new Light(glm::vec3(0, 0, 0));
-	scene->addLight(light);
+	scene->registerRenderable(light);
+
+	camera->addObserver(scene);
+	camera->setPosition(0, 0, 10);
+	return scene;
+}
+
+Scene* SceneFactory::cubeScene(Camera* camera)
+{
+	Scene* scene = new Scene(new Shader("Shaders/VertexShader.glsl", "Shaders/FragmentShader.glsl"));
+
+	ModelLoader* loader = new ModelLoader();
+	const auto object = loader->load("Models/Cube/cube.obj");
+
+	object->transformation()->setPosition(glm::vec3(5.f, 0.f, 0.f));
+	scene->registerUpdatable(object);
+	scene->registerRenderable(object);
+	
+	Light* light = new Light(glm::vec3(0, 0, 0));
+	scene->registerRenderable(light);
+
+	camera->addObserver(scene);
+	camera->setPosition(0, 0, 10);
+	return scene;
+}
+
+Scene* SceneFactory::houseScene(Camera* camera)
+{
+	Scene* scene = new Scene(new Shader("Shaders/VertexShader.glsl", "Shaders/FragmentShader.glsl"));
+
+	ModelLoader* loader = new ModelLoader();
+	LoadedObject* object = loader->load("Models/House/house.obj");
+
+	object->transformation()->setPosition(glm::vec3(5.f, 0.f, 0.f));
+	scene->registerUpdatable(object);
+	scene->registerRenderable(object);
+
+	Light* light = new Light(glm::vec3(10, 10, 10));
+	scene->registerRenderable(light);
 
 	camera->addObserver(scene);
 	camera->setPosition(0, 0, 10);

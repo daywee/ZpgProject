@@ -7,23 +7,25 @@
 #include "Camera.h"
 #include "Shader.h"
 #include "Light.h"
+#include "Updatable.h"
 
-class Scene : public IObserver
+class Scene : public IObserver, public IUpdatable
 {
 public:
 	Scene(Shader* shader);
 	~Scene();
 
 	void render(GLFWwindow*);
-	void update();
-	void addObject(Object* object);
-	void addLight(Light* light);
+	void update() override;
+
+	void registerRenderable(IRenderable* renderable);
+	void registerUpdatable(IUpdatable* updatable);
 
 	void notify(ISubject* subject) override;
 
 private:
-	vector<Object*> objects_;
-	vector<Light*> lights_;
+	vector<IRenderable*> renderables_;
+	vector<IUpdatable*> updatables_;
 
 	GLuint vao_;
 	GLuint vbo_;

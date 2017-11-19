@@ -15,12 +15,12 @@ Light::~Light()
 {
 }
 
-void Light::setPosition(glm::vec3 position)
+void Light::setPosition(glm::vec3 position) // todo: use Transformable
 {
 	position_ = position;
 }
 
-void Light::draw(Shader* shader)
+void Light::render(Shader* shader)
 {
 	shader->useProgram();
 	shader->useLightPosition(position_); // todo: observer

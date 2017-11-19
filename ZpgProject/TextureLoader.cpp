@@ -14,7 +14,7 @@ TextureLoader::~TextureLoader()
 {
 }
 
-GLuint TextureLoader::load(std::string path, GLuint programId)
+GLuint TextureLoader::load(const std::string path)
 {
 	cv::Mat image = cv::imread(path);
 	// cv::imshow("texture image", image);

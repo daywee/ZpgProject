@@ -23,7 +23,7 @@ Application::Application()
 	initWindow();
 	initCallbacks();
 	camera_ = new Camera();
-	scene_ = SceneFactory::getTestScene1(camera_);
+	scene_ = SceneFactory::houseScene(camera_);
 	gameController_ = GameController::getInstance();
 	gameController_->setCamera(camera_);
 	printVersionInfo();
@@ -42,9 +42,9 @@ void Application::run()
 	{
 		const auto start = std::chrono::system_clock::now();
 
-		double x, y;
-		glfwGetCursorPos(window_, &x, &y);
-		gameController_->moveMouse(x, y);
+		double mouseX, mouseY;
+		glfwGetCursorPos(window_, &mouseX, &mouseY);
+		gameController_->moveMouse(mouseX, mouseY);
 		scene_->update();
 		gameController_->update();
 		scene_->render(window_);

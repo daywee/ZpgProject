@@ -2,9 +2,9 @@
 #include <GL/glew.h>
 #include "Transformation.h"
 #include "Shader.h"
-#include "Camera.h"
-#include "Sphere.h"
-#include <functional>
+#include "IRenderable.h"
+#include "Updatable.h"
+#include "Transformable.h"
 
 enum ObjectType
 {
@@ -14,15 +14,13 @@ enum ObjectType
 	SuziSmooth
 };
 
-class Object
+class Object : public IRenderable, public Updatable, public Transformable
 {
 public:
 	Object(ObjectType type);
 	~Object();
 
-	void draw(Shader* shader);
-	void update();
-	std::function<void()> onUpdate;
+	void render(Shader* shader) override;
 
 	Transformation* transformation();
 

@@ -8,6 +8,6 @@ public:
 	TextureLoader();
 	~TextureLoader();
 
-	GLuint load(std::string path, GLuint programId);
+	GLuint load(std::string path);
 };
 

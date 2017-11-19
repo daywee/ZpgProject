@@ -4,6 +4,8 @@
 class SceneFactory
 {
 public:
-	static Scene* getTestScene1(Camera* camera);
+	static Scene* testScene(Camera* camera);
+	static Scene* cubeScene(Camera* camera);
+	static Scene* houseScene(Camera* camera);
 };
 

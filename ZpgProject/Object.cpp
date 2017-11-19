@@ -3,6 +3,7 @@
 #include "SuziFlat.h"
 #include "SuziSmooth.h"
 #include "Plain.h"
+#include "Sphere.h"
 
 int Object::nextId = 0;
 
@@ -11,7 +12,6 @@ Object::Object(ObjectType type)
 	id_ = nextId++;
 	transformation_ = new Transformation();
 	type_ = type;
-	onUpdate = []() {};
 
 	switch (type)
 	{
@@ -27,7 +27,7 @@ Object::~Object()
 {
 }
 
-void Object::draw(Shader* shader)
+void Object::render(Shader* shader) // todo: rename to render
 {
 	shader->useProgram();
 	shader->useMatrix(transformation()->matrix());
@@ -42,11 +42,6 @@ void Object::draw(Shader* shader)
 	}
 
 	shader->unuseProgram();
-}
-
-void Object::update()
-{
-	onUpdate();
 }
 
 Transformation* Object::transformation()

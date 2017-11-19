@@ -15,7 +15,7 @@ Shader::Shader(const string vertexFile, const string fragmentFile)
 	normalMatrix_ = glGetUniformLocation(shaderProgram_, "worldLightPosition");
 	cameraPosition_ = glGetUniformLocation(shaderProgram_, "worldCameraPosition");
 	textureLoader_ = new TextureLoader();
-	textureId_ = textureLoader_->load("Textures/bricks.bmp", shaderProgram_);
+	textureId_ = textureLoader_->load("Textures/bricks.bmp");
 }
 
 Shader::~Shader()

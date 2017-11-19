@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include "LoadedObject.h"
 
 class ModelLoader
 {
@@ -7,8 +8,7 @@ public:
 	ModelLoader();
 	~ModelLoader();
 
-private:
-	void load(std::string fileName);
+	LoadedObject* load(std::string fileName);
 };
 
 struct Vertex
