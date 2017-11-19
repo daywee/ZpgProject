@@ -4,7 +4,6 @@
 #include <GL/glew.h>
 #include "Scene.h"
 #include "Light.h"
-#include <chrono>
 #include "SceneFactory.h"
 #include "GameController.h"
 
@@ -41,7 +40,7 @@ void Application::run()
 {
 	while (!glfwWindowShouldClose(window_))
 	{
-		auto start = std::chrono::system_clock::now();
+		const auto start = std::chrono::system_clock::now();
 
 		double x, y;
 		glfwGetCursorPos(window_, &x, &y);
@@ -51,8 +50,7 @@ void Application::run()
 		scene_->render(window_);
 		glfwPollEvents();
 
-		auto end = std::chrono::system_clock::now();
-		chrono::milliseconds elapsed = chrono::duration_cast<chrono::milliseconds>(end - start);
+		printFps(start, std::chrono::system_clock::now());
 	}
 }
 
@@ -150,4 +148,12 @@ void Application::printVersionInfo()
 	printf("Vendor %s\n", glGetString(GL_VENDOR));
 	printf("Renderer %s\n", glGetString(GL_RENDERER));
 	printf("GLSL %s\n", glGetString(GL_SHADING_LANGUAGE_VERSION));
+}
+
+void Application::printFps(const Time start, const Time end) const
+{
+	const chrono::milliseconds elapsed = chrono::duration_cast<chrono::milliseconds>(end - start);
+	const double fps = 1. / (elapsed.count() / 1000.);
+	
+	printf("FPS: %d\n", static_cast<int>(fps));
 }

@@ -4,6 +4,7 @@
 #include "Scene.h"
 #include "Camera.h"
 #include "GameController.h"
+#include <chrono>
 
 class Application
 {
@@ -14,6 +15,8 @@ public:
 	void run();
 
 private:
+	using Time = std::chrono::time_point<std::chrono::system_clock>;
+
 	Application();
 
 	static Application* instance;
@@ -26,8 +29,8 @@ private:
 	void initCallbacks();
 	void initWindow();
 	void printVersionInfo();
+	void printFps(Time start, Time end) const;
 
-	void cursorPosCallback(GLFWwindow* window, double mouseX, double mouseY);
 	void errorCallback(int error, const char* description);
 	void keyCallback(GLFWwindow* window, int key, int scanCode, int action, int mods);
 	void mouseButtonCallback(GLFWwindow* window, int button, int action, int mods);
