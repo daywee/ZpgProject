@@ -53,6 +53,13 @@ LoadedObject* ModelLoader::load(std::string fileName)
 			if (AI_SUCCESS == aiGetMaterialColor(mat, AI_MATKEY_COLOR_DIFFUSE, &d))
 				diffuse = glm::vec4(d.r, d.g, d.b, d.a);
 
+			aiString path;
+			if (mat->GetTexture(aiTextureType_DIFFUSE, 0, &path, NULL, NULL, NULL, NULL, NULL) == AI_SUCCESS)
+			{
+				auto textureLoader = new TextureLoader();
+				GLuint id = textureLoader->load("Models/House/" + string(path.C_Str()));
+			}
+
 		}
 
 		for (unsigned int i = 0; i < scene->mNumMeshes; i++)                      //Objects

@@ -124,6 +124,7 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="ModelLoader.cpp" />
     <ClCompile Include="Object.cpp" />
+    <ClCompile Include="PlainObject.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneFactory.cpp" />
     <ClCompile Include="Shader.cpp" />
@@ -134,6 +135,10 @@
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
+    <None Include="Shaders\Fragment\CubeMap.glsl" />
+    <None Include="Shaders\Fragment\FragmentShader.glsl" />
+    <None Include="Shaders\Vertex\CubeMap.glsl" />
+    <None Include="Shaders\Vertex\VertexShader.glsl" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
@@ -148,6 +153,7 @@
     <ClInclude Include="ModelLoader.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Plain.h" />
+    <ClInclude Include="PlainObject.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneFactory.h" />
     <ClInclude Include="Shader.h" />

@@ -3,7 +3,6 @@
 #include <cstdlib>
 #include <GL/glew.h>
 #include "Scene.h"
-#include "Light.h"
 #include "SceneFactory.h"
 #include "GameController.h"
 
@@ -23,7 +22,7 @@ Application::Application()
 	initWindow();
 	initCallbacks();
 	camera_ = new Camera();
-	scene_ = SceneFactory::houseScene(camera_);
+	scene_ = SceneFactory::cubeScene(camera_);
 	gameController_ = GameController::getInstance();
 	gameController_->setCamera(camera_);
 	printVersionInfo();
@@ -152,8 +151,11 @@ void Application::printVersionInfo()
 
 void Application::printFps(const Time start, const Time end) const
 {
+	// todo: print it less often
+
 	const chrono::milliseconds elapsed = chrono::duration_cast<chrono::milliseconds>(end - start);
 	const double fps = 1. / (elapsed.count() / 1000.);
+	std::string title = "ZPG - FPS: " + std::to_string(static_cast<int>(fps));
 	
-	printf("FPS: %d\n", static_cast<int>(fps));
+	glfwSetWindowTitle(window_, title.c_str());
 }

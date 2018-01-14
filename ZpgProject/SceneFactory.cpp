@@ -4,7 +4,7 @@
 
 Scene* SceneFactory::testScene(Camera* camera)
 {
-	Scene* scene = new Scene(new Shader("Shaders/VertexShader.glsl", "Shaders/FragmentShader.glsl"));
+	Scene* scene = new Scene(new Shader("Shaders/Vertex/VertexShader.glsl", "Shaders/Fragment/FragmentShader.glsl"));
 
 	Object* object1 = new Object(Sphere);
 	Object* object2 = new Object(Plain);
@@ -47,7 +47,7 @@ Scene* SceneFactory::testScene(Camera* camera)
 
 Scene* SceneFactory::cubeScene(Camera* camera)
 {
-	Scene* scene = new Scene(new Shader("Shaders/VertexShader.glsl", "Shaders/FragmentShader.glsl"));
+	Scene* scene = new Scene(new Shader("Shaders/Vertex/VertexShader.glsl", "Shaders/Fragment/FragmentShader.glsl"));
 
 	ModelLoader* loader = new ModelLoader();
 	const auto object = loader->load("Models/Cube/cube.obj");
@@ -66,10 +66,15 @@ Scene* SceneFactory::cubeScene(Camera* camera)
 
 Scene* SceneFactory::houseScene(Camera* camera)
 {
-	Scene* scene = new Scene(new Shader("Shaders/VertexShader.glsl", "Shaders/FragmentShader.glsl"));
+	Scene* scene = new Scene(new Shader("Shaders/Vertex/VertexShader.glsl", "Shaders/Fragmetn/FragmentShader.glsl"));
 
 	ModelLoader* loader = new ModelLoader();
 	LoadedObject* object = loader->load("Models/House/house.obj");
+
+	/*Object* plain = new Object(Plain);
+	plain->transformation()->setSize(glm::vec3(100));
+	scene->registerRenderable(plain);*/
+
 
 	object->transformation()->setPosition(glm::vec3(5.f, 0.f, 0.f));
 	scene->registerUpdatable(object);
