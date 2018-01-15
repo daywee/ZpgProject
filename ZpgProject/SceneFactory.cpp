@@ -4,7 +4,7 @@
 
 Scene* SceneFactory::testScene(Camera* camera)
 {
-	Scene* scene = new Scene(new Shader(Phong));
+	Scene* scene = new Scene(new Shader(PhongTexture));
 
 	Object* object1 = new Object(Sphere);
 	Object* object2 = new Object(Plain);
@@ -35,7 +35,7 @@ Scene* SceneFactory::testScene(Camera* camera)
 	object2->transformation()->setPosition(glm::vec3(0.f, -5.f, 0.f));
 	object3->transformation()->setPosition(glm::vec3(-5.f, 0.f, 0.f));
 	object4->transformation()->setPosition(glm::vec3(0.f, 5.f, 0.f));
-	object5->transformation()->setPosition(glm::vec3(0.f, 0.f, 5.f));
+	object5->transformation()->setPosition(glm::vec3(5.f, -5.f, 0.f));
 
 	Light* light = new Light(glm::vec3(0, 0, 0));
 	scene->registerRenderable(light);
@@ -70,7 +70,7 @@ Scene* SceneFactory::houseScene(Camera* camera)
 	Model* m = new Model("Models/House/house.obj");
 
 	m->transformation()->setPosition(glm::vec3(5.f, 0.f, 0.f));
-	scene->registerUpdatable(m);
+	scene->registerUpdatable(m); // todo: try to remove
 	scene->registerRenderable(m);
 
 	Light* light = new Light(glm::vec3(10, 10, 10));

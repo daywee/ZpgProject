@@ -34,6 +34,8 @@ private:
 
 	GLuint vao_;
 	GLuint vbo_;
+	GLuint ebo_;
+	GLuint textureId_;
 	Transformation *transformation_;
 
 	void initPlain();
@@ -41,5 +43,5 @@ private:
 	void initSuziFlat();
 	void initSuziSmooth();
 
-	void drawInternal(int vertexCount, bool texture = false);
+	void renderInternal(int vertexCount, bool texture = false);
 };
