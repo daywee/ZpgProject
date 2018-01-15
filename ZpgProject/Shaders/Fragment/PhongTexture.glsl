@@ -5,9 +5,11 @@ in vec3 worldNormal;
 uniform vec3 worldLightPosition;
 uniform vec3 worldCameraPosition;
 
+in vec2 texCoord;
+uniform sampler2D myTexture;
+
 out vec4 frag_colour;
 
-const vec4 diffuseColor = vec4(0.385, 0.647, 0.812, 1.0);
 const vec4 ambient = vec4(0.1, 0.1, 0.1, 1.0);
 const vec4 specularColor = vec4(1.0, 1.0, 1.0, 1.0);
 
@@ -25,5 +27,5 @@ void main () {
 		specular = pow(specularAngle, 40.0);
 	}
 
-	frag_colour = ambient + lambertian * diffuseColor + specular * specularColor;
+	frag_colour = ambient + lambertian * texture(myTexture, texCoord) + specular * specularColor;
 }

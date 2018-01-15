@@ -140,10 +140,12 @@
     <None Include="Shaders\Fragment\CubeMap.glsl" />
     <None Include="Shaders\Fragment\Common.glsl" />
     <None Include="Shaders\Fragment\Phong.glsl" />
+    <None Include="Shaders\Fragment\PhongTexture.glsl" />
     <None Include="Shaders\Vertex\BasicTexture.glsl" />
     <None Include="Shaders\Vertex\CubeMap.glsl" />
     <None Include="Shaders\Vertex\Phong.glsl" />
     <None Include="Shaders\Vertex\Common.glsl" />
+    <None Include="Shaders\Vertex\PhongTexture.glsl" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />

@@ -4,7 +4,7 @@
 
 Scene* SceneFactory::testScene(Camera* camera)
 {
-	Scene* scene = new Scene(new Shader("Shaders/Vertex/VertexShader.glsl", "Shaders/Fragment/FragmentShader.glsl"));
+	Scene* scene = new Scene(new Shader(Phong));
 
 	Object* object1 = new Object(Sphere);
 	Object* object2 = new Object(Plain);

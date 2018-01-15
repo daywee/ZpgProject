@@ -26,6 +26,9 @@ Shader::Shader(ShaderType type)
 	case Phong:
 		shaderProgram_ = shaderLoader_->loadShader("Shaders/Vertex/Phong.glsl", "Shaders/Fragment/Phong.glsl");
 		break;
+	case PhongTexture:
+		shaderProgram_ = shaderLoader_->loadShader("Shaders/Vertex/PhongTexture.glsl", "Shaders/Fragment/PhongTexture.glsl");
+		break;
 	case Common:
 		shaderProgram_ = shaderLoader_->loadShader("Shaders/Vertex/Common.glsl", "Shaders/Fragment/Common.glsl");
 		break;

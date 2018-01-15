@@ -100,6 +100,12 @@
     <None Include="Shaders\Vertex\Common.glsl">
       <Filter>Shaders\Vertex</Filter>
     </None>
+    <None Include="Shaders\Fragment\PhongTexture.glsl">
+      <Filter>Shaders\Fragment</Filter>
+    </None>
+    <None Include="Shaders\Vertex\PhongTexture.glsl">
+      <Filter>Shaders\Vertex</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
