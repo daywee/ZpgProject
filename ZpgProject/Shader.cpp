@@ -3,7 +3,6 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <cstddef>
 #include <cstdio>
-#include "TextureLoader.h"
 
 Shader::Shader(const string vertexFile, const string fragmentFile)
 {
@@ -32,8 +31,6 @@ Shader::Shader(ShaderType type)
 		std::stringstream message;
 		message << "Universal shader does not exist." << endl;
 		throw std::exception(message.str().c_str());
-		//shaderProgram_ = shaderLoader_->loadShader("Shaders/Vertex/VertexShader.glsl", "Shaders/Fragment/FragmentShader.glsl");
-		break;
 	}
 	default: {
 		std::stringstream message;
@@ -49,7 +46,6 @@ Shader::~Shader()
 {
 	shaderLoader_->deleteShader();
 	delete shaderLoader_;
-	delete textureLoader_;
 }
 
 void Shader::checkStatus()
@@ -106,10 +102,6 @@ void Shader::init()
 	projectionMatrix_ = glGetUniformLocation(shaderProgram_, "projectionMatrix");
 	normalMatrix_ = glGetUniformLocation(shaderProgram_, "worldLightPosition");
 	cameraPosition_ = glGetUniformLocation(shaderProgram_, "worldCameraPosition");
-
-	// todo: shouldn't be here
-	textureLoader_ = new TextureLoader();
-	textureId_ = textureLoader_->load("Models/House/house.png");
 }
 
 void Shader::useProjectionMatrix(glm::mat4 matrix)

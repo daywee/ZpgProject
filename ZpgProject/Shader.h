@@ -43,8 +43,6 @@ private:
 	GLint projectionMatrix_;
 	GLint normalMatrix_;
 	GLint cameraPosition_;
-	GLuint textureId_;
-	TextureLoader* textureLoader_;
 
 	void init();
 };
