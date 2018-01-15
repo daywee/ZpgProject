@@ -139,10 +139,12 @@
     <None Include="packages.config" />
     <None Include="Shaders\Fragment\BasicTexture.glsl" />
     <None Include="Shaders\Fragment\CubeMap.glsl" />
-    <None Include="Shaders\Fragment\FragmentShader.glsl" />
+    <None Include="Shaders\Fragment\Common.glsl" />
+    <None Include="Shaders\Fragment\Phong.glsl" />
     <None Include="Shaders\Vertex\BasicTexture.glsl" />
     <None Include="Shaders\Vertex\CubeMap.glsl" />
-    <None Include="Shaders\Vertex\VertexShader.glsl" />
+    <None Include="Shaders\Vertex\Phong.glsl" />
+    <None Include="Shaders\Vertex\Common.glsl" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />

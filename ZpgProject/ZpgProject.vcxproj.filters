@@ -79,20 +79,30 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="ClassDiagram1.cd" />
-    <None Include="Shaders\Vertex\VertexShader.glsl">
-      <Filter>Shaders\Vertex</Filter>
-    </None>
-    <None Include="Shaders\Fragment\FragmentShader.glsl">
-      <Filter>Shaders\Fragment</Filter>
-    </None>
     <None Include="Shaders\Fragment\CubeMap.glsl">
       <Filter>Shaders\Fragment</Filter>
     </None>
     <None Include="Shaders\Vertex\CubeMap.glsl">
       <Filter>Shaders\Vertex</Filter>
     </None>
-    <None Include="Shaders\Fragment\BasicTexture.glsl" />
-    <None Include="Shaders\Vertex\BasicTexture.glsl" />
+    <None Include="Shaders\Fragment\BasicTexture.glsl">
+      <Filter>Shaders\Fragment</Filter>
+    </None>
+    <None Include="Shaders\Vertex\BasicTexture.glsl">
+      <Filter>Shaders\Vertex</Filter>
+    </None>
+    <None Include="Shaders\Fragment\Phong.glsl">
+      <Filter>Shaders\Fragment</Filter>
+    </None>
+    <None Include="Shaders\Vertex\Phong.glsl">
+      <Filter>Shaders\Vertex</Filter>
+    </None>
+    <None Include="Shaders\Fragment\Common.glsl">
+      <Filter>Shaders\Fragment</Filter>
+    </None>
+    <None Include="Shaders\Vertex\Common.glsl">
+      <Filter>Shaders\Vertex</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">

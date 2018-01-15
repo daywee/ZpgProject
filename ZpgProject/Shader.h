@@ -9,7 +9,7 @@ enum ShaderType
 	BasicTexture,
 	CubeMap,
 	Phong,
-	Universal
+	Common
 };
 
 class Shader

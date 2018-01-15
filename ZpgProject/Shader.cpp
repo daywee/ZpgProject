@@ -26,12 +26,9 @@ Shader::Shader(ShaderType type)
 	case Phong:
 		shaderProgram_ = shaderLoader_->loadShader("Shaders/Vertex/Phong.glsl", "Shaders/Fragment/Phong.glsl");
 		break;
-	case Universal:
-	{
-		std::stringstream message;
-		message << "Universal shader does not exist." << endl;
-		throw std::exception(message.str().c_str());
-	}
+	case Common:
+		shaderProgram_ = shaderLoader_->loadShader("Shaders/Vertex/Common.glsl", "Shaders/Fragment/Common.glsl");
+		break;
 	default: {
 		std::stringstream message;
 		message << "This shader type does not exist (" << static_cast<int>(type) << ")." << endl;
