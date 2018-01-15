@@ -122,6 +122,8 @@
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="LoadedObject.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Mesh.cpp" />
+    <ClCompile Include="Model.cpp" />
     <ClCompile Include="ModelLoader.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="PlainObject.cpp" />
@@ -150,6 +152,8 @@
     <ClInclude Include="IUpdatable.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="LoadedObject.h" />
+    <ClInclude Include="Mesh.h" />
+    <ClInclude Include="Model.h" />
     <ClInclude Include="ModelLoader.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Plain.h" />

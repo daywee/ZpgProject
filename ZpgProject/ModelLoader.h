@@ -11,7 +11,7 @@ public:
 	LoadedObject* load(std::string fileName);
 };
 
-struct Vertex
+struct VertexML
 {
 	float Position[3];
 	float Normal[3];

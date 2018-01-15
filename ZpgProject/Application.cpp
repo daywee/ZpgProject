@@ -22,7 +22,7 @@ Application::Application()
 	initWindow();
 	initCallbacks();
 	camera_ = new Camera();
-	scene_ = SceneFactory::cubeScene(camera_);
+	scene_ = SceneFactory::houseSceneNew(camera_);
 	gameController_ = GameController::getInstance();
 	gameController_->setCamera(camera_);
 	printVersionInfo();

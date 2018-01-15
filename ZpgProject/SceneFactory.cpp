@@ -1,5 +1,6 @@
 #include "SceneFactory.h"
 #include "ModelLoader.h"
+#include "Model.h"
 
 
 Scene* SceneFactory::testScene(Camera* camera)
@@ -55,7 +56,7 @@ Scene* SceneFactory::cubeScene(Camera* camera)
 	object->transformation()->setPosition(glm::vec3(5.f, 0.f, 0.f));
 	scene->registerUpdatable(object);
 	scene->registerRenderable(object);
-	
+
 	Light* light = new Light(glm::vec3(0, 0, 0));
 	scene->registerRenderable(light);
 
@@ -79,6 +80,29 @@ Scene* SceneFactory::houseScene(Camera* camera)
 	object->transformation()->setPosition(glm::vec3(5.f, 0.f, 0.f));
 	scene->registerUpdatable(object);
 	scene->registerRenderable(object);
+
+	Light* light = new Light(glm::vec3(10, 10, 10));
+	scene->registerRenderable(light);
+
+	camera->addObserver(scene);
+	camera->setPosition(0, 0, 10);
+	return scene;
+}
+
+Scene* SceneFactory::houseSceneNew(Camera* camera)
+{
+	Scene* scene = new Scene(new Shader("Shaders/Vertex/VertexShader.glsl", "Shaders/Fragment/FragmentShader.glsl"));
+
+	/*
+		ModelLoader* loader = new ModelLoader();
+		LoadedObject* object = loader->load("Models/House/house.obj");*/
+
+	Model* m = new Model("Models/House/house.obj");
+
+
+	m->transformation()->setPosition(glm::vec3(5.f, 0.f, 0.f));
+	scene->registerUpdatable(m);
+	scene->registerRenderable(m);
 
 	Light* light = new Light(glm::vec3(10, 10, 10));
 	scene->registerRenderable(light);

@@ -19,6 +19,12 @@ public:
 	void useLightPosition(glm::vec3 position);
 	void useCameraPosition(glm::vec3 position);
 
+	// todo: remove !!! this is only temporary
+	GLuint getProgram() const
+	{
+		return shaderProgram_;
+	}
+
 private:
 	ShaderLoader* shaderLoader_;
 

@@ -66,8 +66,8 @@ LoadedObject* ModelLoader::load(std::string fileName)
 		{
 			aiMesh* mesh = scene->mMeshes[i];
 
-			Vertex* pVertices = new Vertex[mesh->mNumVertices];
-			std::memset(pVertices, 0, sizeof(Vertex)* mesh->mNumVertices);
+			VertexML* pVertices = new VertexML[mesh->mNumVertices];
+			std::memset(pVertices, 0, sizeof(VertexML)* mesh->mNumVertices);
 
 			for (unsigned int i = 0; i < mesh->mNumVertices; i++)
 			{
@@ -119,16 +119,16 @@ LoadedObject* ModelLoader::load(std::string fileName)
 			glBindVertexArray(vao);
 			glBindBuffer(GL_ARRAY_BUFFER, vbo);
 
-			glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex)* mesh->mNumVertices, pVertices, GL_STATIC_DRAW);
+			glBufferData(GL_ARRAY_BUFFER, sizeof(VertexML)* mesh->mNumVertices, pVertices, GL_STATIC_DRAW);
 
 			glEnableVertexAttribArray(0);
-			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)(0));
+			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(VertexML), (GLvoid*)(0));
 			glEnableVertexAttribArray(1);
-			glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)(3 * sizeof(GLfloat)));
+			glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(VertexML), (GLvoid*)(3 * sizeof(GLfloat)));
 			glEnableVertexAttribArray(2);
-			glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)(6 * sizeof(GLfloat)));
+			glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(VertexML), (GLvoid*)(6 * sizeof(GLfloat)));
 			glEnableVertexAttribArray(3);
-			glVertexAttribPointer(3, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)(8 * sizeof(GLfloat)));
+			glVertexAttribPointer(3, 4, GL_FLOAT, GL_FALSE, sizeof(VertexML), (GLvoid*)(8 * sizeof(GLfloat)));
 
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
 			glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint)* mesh->mNumFaces * 3, pIndices, GL_STATIC_DRAW);
