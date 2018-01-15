@@ -4,10 +4,19 @@
 #include <glm/glm.hpp>
 #include "TextureLoader.h"
 
+enum ShaderType
+{
+	BasicTexture,
+	CubeMap,
+	Phong,
+	Universal
+};
+
 class Shader
 {
 public:
 	Shader(const string vertexFile, const string fragmentFile);
+	Shader(ShaderType type);
 	~Shader();
 	
 	void checkStatus();
@@ -36,4 +45,6 @@ private:
 	GLint cameraPosition_;
 	GLuint textureId_;
 	TextureLoader* textureLoader_;
+
+	void init();
 };

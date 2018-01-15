@@ -91,6 +91,8 @@
     <None Include="Shaders\Vertex\CubeMap.glsl">
       <Filter>Shaders\Vertex</Filter>
     </None>
+    <None Include="Shaders\Fragment\BasicTexture.glsl" />
+    <None Include="Shaders\Vertex\BasicTexture.glsl" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">

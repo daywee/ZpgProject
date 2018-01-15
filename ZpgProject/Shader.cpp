@@ -9,13 +9,40 @@ Shader::Shader(const string vertexFile, const string fragmentFile)
 {
 	shaderLoader_ = new ShaderLoader();
 	shaderProgram_ = shaderLoader_->loadShader(vertexFile.c_str(), fragmentFile.c_str());
-	modelMatrix_ = glGetUniformLocation(shaderProgram_, "modelMatrix");
-	viewMatrix_ = glGetUniformLocation(shaderProgram_, "viewMatrix");
-	projectionMatrix_ = glGetUniformLocation(shaderProgram_, "projectionMatrix");
-	normalMatrix_ = glGetUniformLocation(shaderProgram_, "worldLightPosition");
-	cameraPosition_ = glGetUniformLocation(shaderProgram_, "worldCameraPosition");
-	textureLoader_ = new TextureLoader();
-	textureId_ = textureLoader_->load("Models/House/house.png");
+	init();
+}
+
+Shader::Shader(ShaderType type)
+{
+	shaderLoader_ = new ShaderLoader();
+
+	switch (type)
+	{
+	case BasicTexture:
+		shaderProgram_ = shaderLoader_->loadShader("Shaders/Vertex/BasicTexture.glsl", "Shaders/Fragment/BasicTexture.glsl");
+		break;
+	case CubeMap:
+		shaderProgram_ = shaderLoader_->loadShader("Shaders/Vertex/CubeMap.glsl", "Shaders/Fragment/CubeMap.glsl");
+		break;
+	case Phong:
+		shaderProgram_ = shaderLoader_->loadShader("Shaders/Vertex/Phong.glsl", "Shaders/Fragment/Phong.glsl");
+		break;
+	case Universal:
+	{
+		std::stringstream message;
+		message << "Universal shader does not exist." << endl;
+		throw std::exception(message.str().c_str());
+		//shaderProgram_ = shaderLoader_->loadShader("Shaders/Vertex/VertexShader.glsl", "Shaders/Fragment/FragmentShader.glsl");
+		break;
+	}
+	default: {
+		std::stringstream message;
+		message << "This shader type does not exist (" << static_cast<int>(type) << ")." << endl;
+		throw std::exception(message.str().c_str());
+	}
+	}
+
+	init();
 }
 
 Shader::~Shader()
@@ -63,6 +90,26 @@ void Shader::useLightPosition(glm::vec3 position)
 void Shader::useCameraPosition(glm::vec3 position)
 {
 	glProgramUniform3f(shaderProgram_, cameraPosition_, position.x, position.y, position.z);
+}
+
+void Shader::init()
+{
+	if (shaderProgram_ == 0)
+	{
+		std::stringstream message;
+		message << "Cannot init() shader. ProgramId not set." << endl;
+		throw std::exception(message.str().c_str());
+	}
+
+	modelMatrix_ = glGetUniformLocation(shaderProgram_, "modelMatrix");
+	viewMatrix_ = glGetUniformLocation(shaderProgram_, "viewMatrix");
+	projectionMatrix_ = glGetUniformLocation(shaderProgram_, "projectionMatrix");
+	normalMatrix_ = glGetUniformLocation(shaderProgram_, "worldLightPosition");
+	cameraPosition_ = glGetUniformLocation(shaderProgram_, "worldCameraPosition");
+
+	// todo: shouldn't be here
+	textureLoader_ = new TextureLoader();
+	textureId_ = textureLoader_->load("Models/House/house.png");
 }
 
 void Shader::useProjectionMatrix(glm::mat4 matrix)

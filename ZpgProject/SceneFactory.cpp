@@ -91,14 +91,8 @@ Scene* SceneFactory::houseScene(Camera* camera)
 
 Scene* SceneFactory::houseSceneNew(Camera* camera)
 {
-	Scene* scene = new Scene(new Shader("Shaders/Vertex/VertexShader.glsl", "Shaders/Fragment/FragmentShader.glsl"));
-
-	/*
-		ModelLoader* loader = new ModelLoader();
-		LoadedObject* object = loader->load("Models/House/house.obj");*/
-
+	Scene* scene = new Scene(new Shader(BasicTexture));
 	Model* m = new Model("Models/House/house.obj");
-
 
 	m->transformation()->setPosition(glm::vec3(5.f, 0.f, 0.f));
 	scene->registerUpdatable(m);
