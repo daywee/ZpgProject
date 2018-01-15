@@ -72,7 +72,7 @@ Mesh Model::processMesh(aiMesh* mesh, const aiScene* scene)
 		Vertex vertex;
 		glm::vec3 vector; // We declare a placeholder vector since assimp uses its own vector class that doesn't directly convert to glm's vec3 class so we transfer the data to this placeholder glm::vec3 first.
 
-						  // Positions
+		// Positions
 		vector.x = mesh->mVertices[i].x;
 		vector.y = mesh->mVertices[i].y;
 		vector.z = mesh->mVertices[i].z;
@@ -85,7 +85,7 @@ Mesh Model::processMesh(aiMesh* mesh, const aiScene* scene)
 		vertex.Normal = vector;
 
 		// Texture Coordinates
-		if (mesh->mTextureCoords[0]) // Does the mesh contain texture coordinates?
+		if (mesh->HasTextureCoords(0))
 		{
 			glm::vec2 vec;
 			// A vertex can contain up to 8 different texture coordinates. We thus make the assumption that we won't
@@ -98,6 +98,15 @@ Mesh Model::processMesh(aiMesh* mesh, const aiScene* scene)
 		{
 			vertex.TexCoords = glm::vec2(0.0f, 0.0f);
 		}
+
+		// todo: tangents
+		/*if (mesh->HasTangentsAndBitangents())
+		{
+			vector.x = mesh->mTangents[i].x;
+			vector.y = mesh->mTangents[i].y;
+			vector.z = mesh->mTangents[i].z;
+			vertex.Tangent = vector;
+		}*/
 
 		vertices.push_back(vertex);
 	}

@@ -1,5 +1,4 @@
 #include "SceneFactory.h"
-#include "ModelLoader.h"
 #include "Model.h"
 
 
@@ -50,12 +49,12 @@ Scene* SceneFactory::cubeScene(Camera* camera)
 {
 	Scene* scene = new Scene(new Shader("Shaders/Vertex/VertexShader.glsl", "Shaders/Fragment/FragmentShader.glsl"));
 
-	ModelLoader* loader = new ModelLoader();
-	const auto object = loader->load("Models/Cube/cube.obj");
+	//ModelLoader* loader = new ModelLoader();
+	//const auto object = loader->load("Models/Cube/cube.obj");
 
-	object->transformation()->setPosition(glm::vec3(5.f, 0.f, 0.f));
-	scene->registerUpdatable(object);
-	scene->registerRenderable(object);
+	//object->transformation()->setPosition(glm::vec3(5.f, 0.f, 0.f));
+	//scene->registerUpdatable(object);
+	//scene->registerRenderable(object);
 
 	Light* light = new Light(glm::vec3(0, 0, 0));
 	scene->registerRenderable(light);
@@ -66,30 +65,6 @@ Scene* SceneFactory::cubeScene(Camera* camera)
 }
 
 Scene* SceneFactory::houseScene(Camera* camera)
-{
-	Scene* scene = new Scene(new Shader("Shaders/Vertex/VertexShader.glsl", "Shaders/Fragmetn/FragmentShader.glsl"));
-
-	ModelLoader* loader = new ModelLoader();
-	LoadedObject* object = loader->load("Models/House/house.obj");
-
-	/*Object* plain = new Object(Plain);
-	plain->transformation()->setSize(glm::vec3(100));
-	scene->registerRenderable(plain);*/
-
-
-	object->transformation()->setPosition(glm::vec3(5.f, 0.f, 0.f));
-	scene->registerUpdatable(object);
-	scene->registerRenderable(object);
-
-	Light* light = new Light(glm::vec3(10, 10, 10));
-	scene->registerRenderable(light);
-
-	camera->addObserver(scene);
-	camera->setPosition(0, 0, 10);
-	return scene;
-}
-
-Scene* SceneFactory::houseSceneNew(Camera* camera)
 {
 	Scene* scene = new Scene(new Shader(BasicTexture));
 	Model* m = new Model("Models/House/house.obj");

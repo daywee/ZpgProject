@@ -54,9 +54,6 @@
     <ClCompile Include="TextureLoader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ModelLoader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="SceneFactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -148,9 +145,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TextureLoader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ModelLoader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SceneFactory.h">

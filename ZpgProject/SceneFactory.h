@@ -7,6 +7,5 @@ public:
 	static Scene* testScene(Camera* camera);
 	static Scene* cubeScene(Camera* camera);
 	static Scene* houseScene(Camera* camera);
-	static Scene* houseSceneNew(Camera* camera);
 };
 
