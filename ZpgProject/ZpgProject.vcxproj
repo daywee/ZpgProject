@@ -130,6 +130,7 @@
     <ClCompile Include="SceneFactory.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="ShaderLoader.cpp" />
+    <ClCompile Include="Skybox.cpp" />
     <ClCompile Include="TextureLoader.cpp" />
     <ClCompile Include="Transformation.cpp" />
   </ItemGroup>
@@ -166,6 +167,7 @@
     <ClInclude Include="SceneFactory.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="ShaderLoader.h" />
+    <ClInclude Include="Skybox.h" />
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="SuziFlat.h" />
     <ClInclude Include="SuziSmooth.h" />

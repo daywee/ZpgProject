@@ -73,6 +73,8 @@ Scene* SceneFactory::houseScene(Camera* camera)
 	scene->registerUpdatable(m); // todo: try to remove
 	scene->registerRenderable(m);
 
+	scene->addSkybox(new Shader(CubeMap), new Skybox());
+
 	Light* light = new Light(glm::vec3(10, 10, 10));
 	scene->registerRenderable(light);
 

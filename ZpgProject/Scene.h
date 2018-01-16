@@ -8,7 +8,7 @@
 #include "Shader.h"
 #include "Light.h"
 #include "Updatable.h"
-
+#include "Skybox.h"
 class Scene : public IObserver, public IUpdatable
 {
 public:
@@ -23,6 +23,8 @@ public:
 
 	void notify(ISubject* subject) override;
 
+	void addSkybox(Shader* shader, Skybox* skybox);
+
 private:
 	vector<IRenderable*> renderables_;
 	vector<IUpdatable*> updatables_;
@@ -30,6 +32,8 @@ private:
 	GLuint vao_;
 	GLuint vbo_;
 	Shader* shader_;
+	Shader* skyboxShader_;
+	Skybox* skybox_;
 
 	void useCamera(Camera* camera);
 };

@@ -16,6 +16,10 @@ void Scene::render(GLFWwindow* window)
 	glClearColor(0.3f, 0.3f, 0.3f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	
+	skybox_->render(skyboxShader_);
+	glClear(GL_DEPTH_BUFFER_BIT);
+
+
 	for each (auto renderable in renderables_)
 	{
 		renderable->render(shader_);
@@ -47,6 +51,12 @@ void Scene::notify(ISubject* subject)
 {
 	Camera* camera = static_cast<Camera*>(subject);
 	useCamera(camera);
+}
+
+void Scene::addSkybox(Shader* shader, Skybox* skybox)
+{
+	skyboxShader_ = shader;
+	skybox_ = skybox;
 }
 
 void Scene::useCamera(Camera* camera)

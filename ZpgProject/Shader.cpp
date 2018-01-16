@@ -20,7 +20,7 @@ Shader::Shader(ShaderType type)
 	case BasicTexture:
 		shaderProgram_ = shaderLoader_->loadShader("Shaders/Vertex/BasicTexture.glsl", "Shaders/Fragment/BasicTexture.glsl");
 		break;
-	case CubeMap:
+	case CubeMap: // todo: rename to Skybox
 		shaderProgram_ = shaderLoader_->loadShader("Shaders/Vertex/CubeMap.glsl", "Shaders/Fragment/CubeMap.glsl");
 		break;
 	case Phong:
