@@ -5,7 +5,8 @@
 #include "Plain.h"
 #include "Sphere.h"
 
-int Object::nextId = 0;
+// todo: merge Object and Model ids together, maybe Application could provide global unique ids
+int Object::nextId = 100;
 
 Object::Object(ObjectType type)
 {
@@ -32,6 +33,11 @@ void Object::render(Shader* shader)
 	shader->useProgram();
 	shader->useMatrix(transformation()->matrix());
 
+	// set stencil buffer
+	glEnable(GL_STENCIL_TEST);
+	glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
+	glStencilFunc(GL_ALWAYS, id_, 0xFF);
+
 	switch (type_)
 	{
 	case Plain:
@@ -50,6 +56,9 @@ void Object::render(Shader* shader)
 	case SuziSmooth: renderInternal(suziSmoothVertexCount); break;
 	default: throw std::exception("Uknown object type");
 	}
+
+	// unset stencil buffer
+	glStencilFunc(GL_ALWAYS, 0, 0xFF);
 
 	shader->unuseProgram();
 }

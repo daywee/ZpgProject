@@ -1,6 +1,6 @@
 #include "Model.h"
 
-unsigned int Model::nextModelId = 0;
+unsigned int Model::nextModelId = 10;
 
 Model::Model(GLchar* path)
 	: modelId_(nextModelId++)
@@ -15,14 +15,20 @@ Model::~Model()
 void Model::render(Shader* shader)
 {
 	shader->useProgram();
+	shader->useMatrix(transformation()->matrix());
+
+	// set stencil buffer
 	glEnable(GL_STENCIL_TEST);
 	glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
 	glStencilFunc(GL_ALWAYS, getUniqueId(), 0xFF);
-	shader->useMatrix(transformation()->matrix());
+
 	for (GLuint i = 0; i < meshes_.size(); i++)
 	{
 		meshes_[i].render(shader);
 	}
+
+	// unset stencil buffer
+	glStencilFunc(GL_ALWAYS, 0, 0xFF);
 }
 
 unsigned Model::getUniqueId()

@@ -81,6 +81,11 @@ Scene* SceneFactory::houseScene(Camera* camera)
 	Light* light2 = new Light(glm::vec3(-10, 10, 10));
 	scene->addLight(light2);
 
+	auto suzi = new Object(SuziSmooth);
+	suzi->transformation()->setPosition(glm::vec3(10, 0, 10));
+	scene->registerRenderable(suzi);
+
+
 	camera->addObserver(scene);
 	camera->setPosition(0, 0, 10);
 	return scene;
