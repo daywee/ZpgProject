@@ -3,6 +3,7 @@
 #include "ShaderLoader.h"
 #include <glm/glm.hpp>
 #include "TextureLoader.h"
+#include <vector>
 
 enum ShaderType
 {
@@ -12,6 +13,8 @@ enum ShaderType
 	PhongTexture,
 	Common
 };
+
+class Light;
 
 class Shader
 {
@@ -28,6 +31,7 @@ public:
 	void useProjectionMatrix(glm::mat4 matrix);
 	void useLightPosition(glm::vec3 position);
 	void useCameraPosition(glm::vec3 position);
+	void useLights(std::vector<Light*> lights);
 
 	// todo: remove !!! this is only temporary
 	GLuint getProgram() const
@@ -44,6 +48,7 @@ private:
 	GLint projectionMatrix_;
 	GLint normalMatrix_;
 	GLint cameraPosition_;
+	GLint lightsCountId_;
 
 	void init();
 };

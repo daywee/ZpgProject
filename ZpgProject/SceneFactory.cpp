@@ -66,7 +66,7 @@ Scene* SceneFactory::cubeScene(Camera* camera)
 
 Scene* SceneFactory::houseScene(Camera* camera)
 {
-	Scene* scene = new Scene(new Shader(BasicTexture));
+	Scene* scene = new Scene(new Shader(PhongTexture));
 	Model* m = new Model("Models/House/house.obj");
 
 	m->transformation()->setPosition(glm::vec3(5.f, 0.f, 0.f));
@@ -75,8 +75,11 @@ Scene* SceneFactory::houseScene(Camera* camera)
 
 	scene->addSkybox(new Shader(CubeMap), new Skybox());
 
-	Light* light = new Light(glm::vec3(10, 10, 10));
-	scene->registerRenderable(light);
+	Light* light1 = new Light(glm::vec3(10, 10, 10));
+	scene->addLight(light1);
+
+	Light* light2 = new Light(glm::vec3(-10, 10, 10));
+	scene->addLight(light2);
 
 	camera->addObserver(scene);
 	camera->setPosition(0, 0, 10);

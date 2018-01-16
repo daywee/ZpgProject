@@ -3,6 +3,7 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <cstddef>
 #include <cstdio>
+#include "Light.h"
 
 Shader::Shader(const string vertexFile, const string fragmentFile)
 {
@@ -88,6 +89,20 @@ void Shader::useCameraPosition(glm::vec3 position)
 	glProgramUniform3f(shaderProgram_, cameraPosition_, position.x, position.y, position.z);
 }
 
+void Shader::useLights(std::vector<Light*> lights)
+{
+	glUniform1i(lightsCountId_, lights.size());
+	int i = 0;
+	for each (auto light in lights)
+	{
+		auto pos = light->getPosition();
+		std::stringstream ss;
+		ss << "lights[" << i << "].position";
+		glUniform3f(glGetUniformLocation(shaderProgram_, ss.str().c_str()), pos.x, pos.y, pos.z);
+		i++;
+	}
+}
+
 void Shader::init()
 {
 	if (shaderProgram_ == 0)
@@ -102,6 +117,7 @@ void Shader::init()
 	projectionMatrix_ = glGetUniformLocation(shaderProgram_, "projectionMatrix");
 	normalMatrix_ = glGetUniformLocation(shaderProgram_, "worldLightPosition");
 	cameraPosition_ = glGetUniformLocation(shaderProgram_, "worldCameraPosition");
+	lightsCountId_ = glGetUniformLocation(shaderProgram_, "lightsCount");
 }
 
 void Shader::useProjectionMatrix(glm::mat4 matrix)

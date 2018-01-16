@@ -24,6 +24,7 @@ public:
 	void notify(ISubject* subject) override;
 
 	void addSkybox(Shader* shader, Skybox* skybox);
+	void addLight(Light* light);
 
 private:
 	vector<IRenderable*> renderables_;
@@ -34,6 +35,7 @@ private:
 	Shader* shader_;
 	Shader* skyboxShader_;
 	Skybox* skybox_;
+	vector<Light*> lights_;
 
 	void useCamera(Camera* camera);
 	void useSkyboxCamera(Camera* camera);

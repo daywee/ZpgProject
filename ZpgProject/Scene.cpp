@@ -19,6 +19,10 @@ void Scene::render(GLFWwindow* window) const
 	skybox_->render(skyboxShader_);
 	glClear(GL_DEPTH_BUFFER_BIT);
 
+	shader_->useProgram();
+	shader_->useLights(lights_);
+	shader_->unuseProgram();
+
 	for each (auto renderable in renderables_)
 	{
 		renderable->render(shader_);
@@ -57,6 +61,11 @@ void Scene::addSkybox(Shader* shader, Skybox* skybox)
 {
 	skyboxShader_ = shader;
 	skybox_ = skybox;
+}
+
+void Scene::addLight(Light* light)
+{
+	lights_.push_back(light);
 }
 
 void Scene::useCamera(Camera* camera)

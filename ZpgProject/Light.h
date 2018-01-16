@@ -11,6 +11,7 @@ public:
 	~Light();
 
 	void setPosition(glm::vec3 position);
+	glm::vec3 getPosition();
 	void render(Shader* shader) override;
 
 private:
