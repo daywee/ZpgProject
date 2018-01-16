@@ -1,6 +1,9 @@
 #include "Model.h"
 
+unsigned int Model::nextModelId = 0;
+
 Model::Model(GLchar* path)
+	: modelId_(nextModelId++)
 {
 	loadModel(path);
 }
@@ -12,11 +15,19 @@ Model::~Model()
 void Model::render(Shader* shader)
 {
 	shader->useProgram();
+	glEnable(GL_STENCIL_TEST);
+	glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
+	glStencilFunc(GL_ALWAYS, getUniqueId(), 0xFF);
 	shader->useMatrix(transformation()->matrix());
 	for (GLuint i = 0; i < meshes_.size(); i++)
 	{
 		meshes_[i].render(shader);
 	}
+}
+
+unsigned Model::getUniqueId()
+{
+	return modelId_;
 }
 
 // Loads a model with supported ASSIMP extensions from file and stores the resulting meshes in the meshes vector.

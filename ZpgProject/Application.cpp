@@ -122,6 +122,16 @@ void Application::keyCallback(GLFWwindow* window, int key, int scanCode, int act
 void Application::mouseButtonCallback(GLFWwindow* window, int button, int action, int mods)
 {
 	printf("mouse_button_callback %d, %d, %d \n", button, action, mods);
+	if (button == 0 && action == 1 && mods == 0) // left click down no mods
+	{
+		int width, height;
+		glfwGetWindowSize(window, &width, &height);
+
+		unsigned int index;
+		glReadPixels(width / 2, height / 2, 1, 1, GL_STENCIL_INDEX, GL_UNSIGNED_INT, &index);
+
+		cout << index << endl;
+	}
 }
 
 void Application::windowFocusCallback(GLFWwindow* window, int focused)

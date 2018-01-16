@@ -19,7 +19,11 @@ public:
 
 	void render(Shader* shader) override;
 
+	unsigned int getUniqueId();
+
 private:
+	static unsigned int nextModelId;
+	unsigned int modelId_;
 	std::vector<Mesh> meshes_;
 	std::string directory_;
 	std::vector<Texture> texturesLoaded_;	// Stores all the textures loaded so far, optimization to make sure textures aren't loaded more than once.
