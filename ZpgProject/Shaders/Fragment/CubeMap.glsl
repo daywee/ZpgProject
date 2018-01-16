@@ -1,6 +1,6 @@
 #version 400
 
-in vec2 texCoord;
+in vec3 texCoord;
 uniform samplerCube myTexture;
 
 out vec4 frag_colour;

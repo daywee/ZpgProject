@@ -13,7 +13,7 @@ public:
 	{
 	}
 
-	Transformation* transformation() const
+	virtual Transformation* transformation() const
 	{
 		return transformation_;
 	}

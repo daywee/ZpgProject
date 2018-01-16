@@ -15,7 +15,7 @@ public:
 	Scene(Shader* shader);
 	~Scene();
 
-	void render(GLFWwindow*);
+	void render(GLFWwindow*) const;
 	void update() override;
 
 	void registerRenderable(IRenderable* renderable);
@@ -36,4 +36,5 @@ private:
 	Skybox* skybox_;
 
 	void useCamera(Camera* camera);
+	void useSkyboxCamera(Camera* camera);
 };

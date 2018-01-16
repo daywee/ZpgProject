@@ -13,12 +13,10 @@ Skybox::Skybox()
 		"Models/Skybox/cubemap/posy.jpg",
 		"Models/Skybox/cubemap/negz.jpg",
 		"Models/Skybox/cubemap/posz.jpg",
-		69
+		0
 	);
 
 	delete tl;
-
-	transformation()->setPosition(glm::vec3(0, 0, 0));
 }
 
 
@@ -30,5 +28,11 @@ void Skybox::render(Shader* shader)
 {
 	shader->useProgram();
 	shader->useMatrix(transformation()->matrix());
+
+	glActiveTexture(GL_TEXTURE0 + 0);
+	glUniform1i(glGetUniformLocation(shader->getProgram(), "skybox"), 0);
+	// And finally bind the texture
+	glBindTexture(GL_TEXTURE_CUBE_MAP, textureId_);
+
 	skybox_->render(shader);
 }
