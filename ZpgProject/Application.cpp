@@ -149,13 +149,22 @@ void Application::printVersionInfo()
 	printf("GLSL %s\n", glGetString(GL_SHADING_LANGUAGE_VERSION));
 }
 
-void Application::printFps(const Time start, const Time end) const
+void Application::printFps(const Time start, const Time end)
 {
-	// todo: print it less often
-
 	const chrono::milliseconds elapsed = chrono::duration_cast<chrono::milliseconds>(end - start);
 	const double fps = 1. / (elapsed.count() / 1000.);
-	std::string title = "ZPG - FPS: " + std::to_string(static_cast<int>(fps));
+	fpsStack[currentFps] = fps;
+
+	double sum = 0;
+	for (size_t i = 0; i < 100; i++)
+	{
+		sum += fpsStack[i];
+	}
+
+	std::string title = "ZPG - FPS: " + std::to_string(static_cast<int>(sum / 100));
 	
 	glfwSetWindowTitle(window_, title.c_str());
+
+	currentFps++;
+	currentFps = currentFps % 100;
 }

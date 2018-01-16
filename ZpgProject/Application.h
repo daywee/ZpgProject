@@ -26,10 +26,13 @@ private:
 	Camera* camera_;
 	GameController* gameController_;
 
+	double fpsStack[100];
+	int currentFps = 0;
+
 	void initCallbacks();
 	void initWindow();
 	void printVersionInfo();
-	void printFps(Time start, Time end) const;
+	void printFps(Time start, Time end);
 
 	void errorCallback(int error, const char* description);
 	void keyCallback(GLFWwindow* window, int key, int scanCode, int action, int mods);
