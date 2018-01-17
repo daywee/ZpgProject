@@ -26,6 +26,8 @@ public:
 	void addSkybox(Shader* shader, Skybox* skybox);
 	void addLight(Light* light);
 
+	void removeRenderableById(GLuint index);
+
 private:
 	vector<IRenderable*> renderables_;
 	vector<IUpdatable*> updatables_;

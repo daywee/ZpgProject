@@ -68,6 +68,22 @@ void Scene::addLight(Light* light)
 	lights_.push_back(light);
 }
 
+// todo: refactor
+// hack
+void Scene::removeRenderableById(GLuint index)
+{
+	int i = 0;
+	for each (auto r in renderables_)
+	{
+		if (((Model*)r)->getUniqueId() == index)
+		{
+			renderables_.erase(renderables_.begin() + i);
+			break;
+		}
+		i++;
+	}
+}
+
 void Scene::useCamera(Camera* camera)
 {
 	shader_->useProgram();

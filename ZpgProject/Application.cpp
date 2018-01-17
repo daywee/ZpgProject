@@ -131,6 +131,7 @@ void Application::mouseButtonCallback(GLFWwindow* window, int button, int action
 		glReadPixels(width / 2, height / 2, 1, 1, GL_STENCIL_INDEX, GL_UNSIGNED_INT, &index);
 
 		cout << index << endl;
+		scene_->removeRenderableById(index);
 	}
 }
 
