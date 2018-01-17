@@ -68,6 +68,11 @@ Scene* SceneFactory::houseScene(Camera* camera)
 {
 	Scene* scene = new Scene(new Shader(PhongTexture));
 	Model* m = new Model("Models/House/house.obj");
+	
+	Object* o = new Object(Plain);
+	o->transformation()->setPosition(glm::vec3(0, 0, 0));
+	o->transformation()->setSize(glm::vec3(1000, 1000, 1000));
+	scene->registerRenderable(o);
 
 	m->transformation()->setPosition(glm::vec3(5.f, 0.f, 0.f));
 	scene->registerUpdatable(m); // todo: try to remove
@@ -84,7 +89,6 @@ Scene* SceneFactory::houseScene(Camera* camera)
 	auto suzi = new Object(SuziSmooth);
 	suzi->transformation()->setPosition(glm::vec3(10, 0, 10));
 	scene->registerRenderable(suzi);
-
 
 	camera->addObserver(scene);
 	camera->setPosition(0, 0, 10);

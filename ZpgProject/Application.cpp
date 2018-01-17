@@ -148,6 +148,7 @@ void Application::windowSizeCallback(GLFWwindow* window, int width, int height)
 {
 	printf("resize %d, %d \n", width, height);
 	glViewport(0, 0, width, height);
+	camera_->setAspect((float)width / (float)height);
 }
 
 void Application::printVersionInfo()

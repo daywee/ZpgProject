@@ -14,6 +14,11 @@ Camera::~Camera()
 {
 }
 
+void Camera::setAspect(const float aspect)
+{
+	aspect_ = aspect;
+}
+
 glm::mat4 Camera::getProjectionMatrix() const
 {
 	return glm::perspective(fov_, aspect_, near_, far_);

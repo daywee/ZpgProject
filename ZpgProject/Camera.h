@@ -8,7 +8,7 @@ class Camera : public ISubject
 public:
 	Camera();
 	~Camera();
-
+	void setAspect(float aspect);
 	glm::mat4 getProjectionMatrix() const;
 	glm::mat4 getViewMatrix() const;
 	void setTarget(float fi, float psi);
